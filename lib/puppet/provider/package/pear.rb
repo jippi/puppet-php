@@ -20,7 +20,7 @@ Puppet::Type.type(:package).provide :pear, :parent => Puppet::Provider::Package 
 
     begin
       channel = "pear"
-      list = execute(command).collect do |set|
+      list = execute(command).lines.collect do |set|
         if match = /INSTALLED PACKAGES, CHANNEL (.*):/i.match(set)
           channel = match[1].downcase
         end
@@ -105,7 +105,7 @@ Puppet::Type.type(:package).provide :pear, :parent => Puppet::Provider::Package 
     # This always gets the latest version available.
     version = ''
     command = [command(:pearcmd), "remote-info", @resource[:name]]
-      list = execute(command).collect do |set|
+      list = execute(command).lines.collect do |set|
       if set =~ /^Latest/
         version = set.split[1]
       end

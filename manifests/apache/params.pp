@@ -40,8 +40,16 @@
 #
 class php::apache::params {
 
+  case $operatingsystem {
+    'opensuse': {
+      $package = 'apache2-mod_php5'
+    }
+    default: {
+      $package  = 'libapache2-mod-php5'
+    }
+  }
+
   $ensure   = $php::params::ensure
-  $package  = 'libapache2-mod-php5'
   $provider = undef
   $inifile  = '/etc/php5/apache2/php.ini'
   $settings = {

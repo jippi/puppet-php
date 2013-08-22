@@ -52,7 +52,7 @@ class php::cli(
   }
 
   package { $package:
-    ensure	 => $ensure,
+    ensure   => $ensure,
     provider => $provider;
   }
 

@@ -42,7 +42,7 @@ define php::config(
 
   augeas { "php-${name}-config":
     context   => "/files${inifile}",
-    load_path => '/usr/share/augeas/lenses/contrib/',
+    load_path => "${php::params::augeausbasedir}/contrib/",
     changes   => template('php/augeas_commands.erb'),
     require   => Class['php::augeas']
   }

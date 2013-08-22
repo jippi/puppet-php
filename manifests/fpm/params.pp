@@ -40,11 +40,21 @@
 #
 class php::fpm::params {
 
-  $ensure   = $php::params::ensure
-  $package  = 'php5-fpm'
-  $provider = undef
-  $inifile  = '/etc/php5/fpm/php.ini'
-  $settings = {
+  case $operatingsystem {
+    'opensuse': {
+      $fpmservicename = 'php-fpm'
+    }
+    default: {
+      $fpmservicename = 'php5-fpm'
+    }
+  }
+
+  $poolincdir = '/etc/php5/fpm/pool.d'
+  $ensure     = $php::params::ensure
+  $package    = 'php5-fpm'
+  $provider   = undef
+  $inifile    = '/etc/php5/fpm/php.ini'
+  $settings   = {
     set => {
       'PHP/short_open_tag'       => 'Off',
       'PHP/asp_tags'             => 'Off',

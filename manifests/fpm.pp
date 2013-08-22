@@ -23,6 +23,15 @@
 #   Hash with 'set' nested hash of key => value
 #   set changes to agues when applied to *inifile*
 #
+# Template options for global fpm config 
+# [*log_level*]
+# [*emergency_restart_threshold*]
+# [*emergency_restart_interval*] 
+# [*process_control_timeout*]
+# [*log_owner*]
+# [*log_group*]
+# [*log_dir_mode*]
+
 # === Variables
 #
 # No variables
@@ -44,8 +53,23 @@ class php::fpm(
   $package  = $php::fpm::params::package,
   $provider = $php::fpm::params::provider,
   $inifile  = $php::fpm::params::inifile,
-  $settings = $php::fpm::params::settings
+  $settings = $php::fpm::params::settings,
+
+  $log_level                    = 'notice',
+  $emergency_restart_threshold  = '0',
+  $emergency_restart_interval   = '0',
+  $process_control_timeout      = '0',
+  $log_owner                    = 'root',
+  $log_group                    = false,
+  $log_dir_mode                 = '0770'
 ) inherits php::fpm::params {
+
+
+ # Hack-ish to default to user for group too
+  $log_group_final = $log_group ? {
+    false   => $log_owner,
+    default => $log_group,
+  }
 
   package { $package:
     ensure   => $ensure,
@@ -58,11 +82,26 @@ class php::fpm(
   }
 
   service { 'php5-fpm':
-    ensure    => running,
-    enable    => true,
-    restart   => 'service php5-fpm reload',
+    name      => $php::fpm::params::fpmservicename,
+    ensure    => $ensure ? { absent => stopped, default => running, },
+    enable    => $ensure ? { absent => false, default => true, },
+    restart   => "service ${php::fpm::params::fpmservicename} reload",
     hasstatus => true,
-    require   => Package[$package]
+    require   => [ Package[$package], File['/etc/php5/fpm/php-fpm.conf'], Php::Config['php-fpm'], ]
+  }
+
+  file { '/etc/php5/fpm/php-fpm.conf':
+    ensure  => $ensure ? { absent => absent, default => file },
+    notify  => Service['php5-fpm'],
+    content => template('php/fpm/php-fpm.conf.erb'),
+    owner   => root,
+    group   => root,
+    mode    => 0644,
+    require => [ Package['php5-fpm'], File[$php::fpm::params::poolincdir], ]
+  }
+
+  file { $php::fpm::params::poolincdir:
+    ensure  => $ensure ? { absent => absent, default => directory },
   }
 
 }

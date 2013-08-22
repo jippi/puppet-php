@@ -39,9 +39,19 @@
 # Copyright 2012-2013 Christian "Jippi" Winther, unless otherwise noted.
 #
 class php::cli::params {
+  
+
+  case $operatingsystem {
+    'opensuse': {
+      $pkgname = 'php5'
+    }
+    default: {
+      $pkgname = 'php5-cli'
+    }
+  }
 
   $ensure   = $php::params::ensure
-  $package  = 'php5-cli'
+  $package  = $pkgname
   $provider = undef
   $inifile  = '/etc/php5/cli/php.ini'
   $settings = {

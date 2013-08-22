@@ -27,6 +27,17 @@
 #
 class php::params {
 
-  $ensure = "installed"
+  case $operatingsystem {
+    'opensuse': {
+      $basepkgname       = 'php5'
+      $augeausbasedir    = '/usr/share/libaugeas0/augeas/lenses'
+    }
+    default: {
+      $basepkgname       = 'php5-common'
+      $augeausbasedir    = '/usr/share/augeas/lenses'
+    }
+  }
+
+  $ensure      = "installed"
 
 }

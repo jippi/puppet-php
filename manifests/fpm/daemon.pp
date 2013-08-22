@@ -39,15 +39,17 @@ class php::fpm::daemon (
       enable    => true,
       restart   => 'service php5-fpm reload',
       hasstatus => true,
-      require   => Package['php5-fpm'],
+      require   => [ Package['php5-fpm'], File['/etc/php5/fpm/php-fpm.conf'], ]
     }
 
     file { '/etc/php5/fpm/php-fpm.conf':
+      ensure  => file,
       notify  => Service['php5-fpm'],
       content => template('php/fpm/php-fpm.conf.erb'),
       owner   => root,
       group   => root,
       mode    => 0644,
+      require => Package['php5-fpm'],
     }
 
   }

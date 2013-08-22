@@ -59,12 +59,12 @@ define php::fpm::conf (
   $group_final = $group ? { undef => $user, default => $group }
 
   if ($ensure == 'absent') {
-    file { "/etc/php5/fpm/pool.d/${pool}.conf":
+    file { "${php::fpm::params::poolincdir}/${pool}.conf":
       ensure => absent,
       notify => Service['php5-fpm']
     }
   } else {
-    file { "/etc/php5/fpm/pool.d/${pool}.conf":
+    file { "${php::fpm::params::poolincdir}/${pool}.conf":
       ensure  => file,
       notify  => Service['php5-fpm'],
       require => Package['php5-fpm'],

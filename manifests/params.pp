@@ -27,7 +27,7 @@
 #
 class php::params {
 
-  case $operatingsystem {
+  case $::operatingsystem {
     'opensuse': {
       $basepkgname       = 'php5'
       $augeausbasedir    = '/usr/share/libaugeas0/augeas/lenses'

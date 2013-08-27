@@ -47,8 +47,8 @@ class php::cli(
 ) inherits php::cli::params {
 
   php::contrib::base_package { 'cli':
-  	ensure   => $ensure,
-  	provider => $provider;
+    ensure   => $ensure,
+    provider => $provider;
   }
 
   package { $package:

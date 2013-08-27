@@ -31,11 +31,11 @@ define php::contrib::base_package(
   $provider
 ) {
 
-	if !defined(Package[$php::params::basepkgname]) {
-		package { $php::params::basepkgname:
-			ensure 	 => $ensure,
-			provider => $provider
-		}
-	}
+  if !defined(Package[$php::params::basepkgname]) {
+    package { $php::params::basepkgname:
+      ensure   => $ensure,
+      provider => $provider
+    }
+  }
 
 }

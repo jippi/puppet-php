@@ -40,7 +40,7 @@
 #
 class php::fpm::params {
 
-  case $operatingsystem {
+  case $::operatingsystem {
     'opensuse': {
       $fpmservicename = 'php-fpm'
     }

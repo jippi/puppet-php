@@ -40,7 +40,7 @@
 #
 class php::apache::params {
 
-  case $operatingsystem {
+  case $::operatingsystem {
     'opensuse': {
       $package = 'apache2-mod_php5'
     }

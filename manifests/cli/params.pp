@@ -39,9 +39,8 @@
 # Copyright 2012-2013 Christian "Jippi" Winther, unless otherwise noted.
 #
 class php::cli::params {
-  
 
-  case $operatingsystem {
+  case $::operatingsystem {
     'opensuse': {
       $pkgname = 'php5'
     }

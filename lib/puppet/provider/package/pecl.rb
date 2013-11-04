@@ -1,8 +1,9 @@
 require 'puppet/provider/package'
 
+# PHP pecl support.
 Puppet::Type.type(:package).newparam(:pipe)
 Puppet::Type.type(:package).provide :pecl, :parent => Puppet::Provider::Package do
-  desc "PHP PEAR support. By default uses the installed channels, but you can specify the path to a pear package via ``source``."
+  desc "PHP pecl support. By default uses the installed channels, but you can specify the path to a pecl package via ``source``."
 
   has_feature :versionable
   has_feature :upgradeable
@@ -15,14 +16,19 @@ Puppet::Type.type(:package).provide :pecl, :parent => Puppet::Provider::Package 
   end
 
   def self.pearlist(hash)
-    command = [command(:pearcmd), "list"]
+    command = [command(:pearcmd), "list", "-a"]
+    channel = "pecl"
 
     begin
       list = execute(command).split("\n")
       list = list.collect do |set|
+        if match = /INSTALLED PACKAGES, CHANNEL (.*):/i.match(set)
+          channel = match[1].downcase
+        end
+
         if hash[:justme]
           if /^#{hash[:justme]}/i.match(set)
-            if pearhash = pearsplit(set)
+            if pearhash = pearsplit(set, channel)
               pearhash[:provider] = :pearcmd
               pearhash
             else
@@ -32,8 +38,8 @@ Puppet::Type.type(:package).provide :pecl, :parent => Puppet::Provider::Package 
             nil
           end
         else
-          if pearhash = pearsplit(set)
-            pearhash[:provider] = :pearcmd
+          if pearhash = pearsplit(set, channel)
+            pearhash[:provider] = :pecl
             pearhash
           else
             nil
@@ -41,7 +47,7 @@ Puppet::Type.type(:package).provide :pecl, :parent => Puppet::Provider::Package 
         end
       end.reject { |p| p.nil? }
     rescue Puppet::ExecutionFailure => detail
-      raise Puppet::Error, "Could not list pears: %s" % detail
+      raise Puppet::Error, "Could not list pecls: %s" % detail
     end
 
     if hash[:justme]
@@ -51,21 +57,22 @@ Puppet::Type.type(:package).provide :pecl, :parent => Puppet::Provider::Package 
     end
   end
 
-  def self.pearsplit(desc)
+  def self.pearsplit(desc, channel)
     desc.strip!
 
     case desc
+    when /^$/ then return nil
     when /^INSTALLED/ then return nil
-    when /No packages installed from channel/i then return nil
+    when /no packages installed/i then return nil
     when /^=/ then return nil
     when /^PACKAGE/ then return nil
-    when /^(\S+)\s+([.\d]+)\s+\S+/ then
+    when /^(\S+)\s+([.\d]+)\s+(\S+)\s*$/ then
       name = $1
       version = $2
-
+      state = $3
       return {
-        :name => name,
-        :ensure => version
+        :name => "#{channel}/#{name}",
+        :ensure => state == 'stable' ? version : state
       }
     else
       Puppet.warning "Could not match %s" % desc
@@ -103,12 +110,12 @@ Puppet::Type.type(:package).provide :pecl, :parent => Puppet::Provider::Package 
   def latest
     version = ''
     command = [command(:pearcmd), "remote-info", "#{@resource[:name]}"]
-      list = execute(command).collect do |set|
+      list = execute(command).split("\n")
+      list = list.collect do |set|
       if set =~ /^Latest/
         version = set.split[1]
       end
     end
-
     return version
   end
 
@@ -127,4 +134,5 @@ Puppet::Type.type(:package).provide :pecl, :parent => Puppet::Provider::Package 
   def update
     self.install(false)
   end
+
 end

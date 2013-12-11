@@ -1,6 +1,6 @@
-# == Class: php::extension::memcache::params
+# == Class: php::extension::memcached::params
 #
-# Defaults file for the Memcache PHP extension
+# Defaults file for the Memcached PHP extension
 #
 # === Parameters
 #
@@ -39,23 +39,23 @@
 #
 # Copyright 2012-2013 Christian "Jippi" Winther, unless otherwise noted.
 #
-class php::extension::memcache::params {
+class php::extension::memcached::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php5-memcache'
+  $package  = 'php5-memcached'
   $provider = undef
-  $inifile  = '/etc/php5/conf.d/20-memcache.ini'
+  $inifile  = '/etc/php5/conf.d/20-memcached.ini'
   $settings = {
     set => {
-      '.anon/memcache.host'           => 'localhost',
-      '.anon/memcache.vhost'          => '/',
-      '.anon/memcache.port'           => 5672,
-      '.anon/memcache.login'          => 'guest',
-      '.anon/memcache.password'       => 'guest',
-      '.anon/memcache.auto_ack'       => 0,
-      '.anon/memcache.min_messages'   => 0,
-      '.anon/memcache.max_messages'   => 1,
-      '.anon/memcache.prefetch_count' => 3
+      '.anon/memcached.host'           => 'localhost',
+      '.anon/memcached.vhost'          => '/',
+      '.anon/memcached.port'           => 5672,
+      '.anon/memcached.login'          => 'guest',
+      '.anon/memcached.password'       => 'guest',
+      '.anon/memcached.auto_ack'       => 0,
+      '.anon/memcached.min_messages'   => 0,
+      '.anon/memcached.max_messages'   => 1,
+      '.anon/memcached.prefetch_count' => 3
     }
   }
 

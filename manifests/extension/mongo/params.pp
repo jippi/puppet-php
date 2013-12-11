@@ -1,6 +1,6 @@
-# == Class: php::extension::apc::params
+# == Class: php::extension::mongo::params
 #
-# Defaults file for the APC PHP extension
+# Defaults file for the MongoDB PHP extension
 #
 # === Parameters
 #
@@ -33,31 +33,31 @@
 # === Authors
 #
 # Christian "Jippi" Winther <jippignu@gmail.com>
+# Nathan Sullivan <nmsullivan@gmail.com>
 #
 # === Copyright
 #
 # Copyright 2012-2013 Christian "Jippi" Winther, unless otherwise noted.
 #
-class php::extension::apc::params {
+class php::extension::mongo::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php-apc'
+  $package  = 'php5-mongo'
   $provider = undef
-  $inifile  = '/etc/php5/conf.d/20-apc.ini'
+  $inifile  = '/etc/php5/conf.d/20-mongo.ini'
   $settings = {
     set => {
-      '.anon/apc.enabled'           => 1,
-      '.anon/apc.cache_by_default'  => 1,
-      '.anon/apc.stat'              => 1,
-      '.anon/apc.localcache'        => 1,
-      '.anon/apc.localcache.size'   => 10000,
-      '.anon/apc.shm_size'          => '64M',
-      '.anon/apc.write_lock'        => 1,
-      '.anon/apc.num_files_hint'    => 10000,
-      '.anon/apc.user_entries_hint' => 40960,
-      '.anon/apc.enable_cli'        => 0,
-      '.anon/apc.file_update_protection' => 1,
-      '.anon/apc.include_once_override' => 1
+      '.anon/mongo.allow_empty_keys'   => 0,
+      '.anon/mongo.allow_persistent'   => 1,
+      '.anon/mongo.chunk_size'         => 262144,
+      '.anon/mongo.cmd'                => '$',
+      '.anon/mongo.default_host'       => 'localhost',
+      '.anon/mongo.default_port'       => 27017,
+      '.anon/mongo.is_master_interval' => 15,
+      '.anon/mongo.long_as_object'     => 0,
+      '.anon/mongo.native_long'        => 0,
+      '.anon/mongo.ping_interval'      => 5,
+      '.anon/mongo.utf8'               => 1
     }
   }
 

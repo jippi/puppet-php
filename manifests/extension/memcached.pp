@@ -1,12 +1,8 @@
-# == Class: php::extension::memcached::params
+# == Class: php::extension::memcached
 #
-# Defaults file for the Memcached PHP extension
+# Install and configure the Memcached PHP extension
 #
 # === Parameters
-#
-# No parameters
-#
-# === Variables
 #
 # [*ensure*]
 #   The version of the package to install
@@ -26,9 +22,13 @@
 #   Hash with 'set' nested hash of key => value
 #   set changes to agues when applied to *inifile*
 #
+# === Variables
+#
+# No variables
+#
 # === Examples
 #
-# No examples
+#  include php::extension::memcached
 #
 # === Authors
 #
@@ -39,24 +39,23 @@
 #
 # Copyright 2012-2013 Christian "Jippi" Winther, unless otherwise noted.
 #
-class php::extension::memcached::params {
+class php::extension::memcached(
+  $ensure   = $php::extension::memcached::params::ensure,
+  $package  = $php::extension::memcached::params::package,
+  $provider = $php::extension::memcached::params::provider,
+  $inifile  = $php::extension::memcached::params::inifile,
+  $settings = $php::extension::memcached::params::settings
+) inherits php::extension::memcached::params {
 
-  $ensure   = $php::params::ensure
-  $package  = 'php5-memcached'
-  $provider = undef
-  $inifile  = '/etc/php5/conf.d/20-memcached.ini'
-  $settings = {
-    set => {
-      '.anon/memcached.host'           => 'localhost',
-      '.anon/memcached.vhost'          => '/',
-      '.anon/memcached.port'           => 5672,
-      '.anon/memcached.login'          => 'guest',
-      '.anon/memcached.password'       => 'guest',
-      '.anon/memcached.auto_ack'       => 0,
-      '.anon/memcached.min_messages'   => 0,
-      '.anon/memcached.max_messages'   => 1,
-      '.anon/memcached.prefetch_count' => 3
-    }
+  php::extension { 'memcached':
+    ensure   => $ensure,
+    package  => $package,
+    provider => $provider
+  }
+
+  php::config { 'php-extension-memcached':
+    inifile  => $inifile,
+    settings => $settings
   }
 
 }

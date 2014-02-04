@@ -50,7 +50,7 @@ class php::fpm (
   package { $package:
     ensure   => $ensure,
     provider => $provider;
-  }
+  } ->
 
   php::config { 'php-fpm':
     inifile  => $inifile,

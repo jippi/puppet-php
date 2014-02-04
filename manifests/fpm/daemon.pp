@@ -30,6 +30,10 @@ class php::fpm::daemon (
       restart   => 'service php5-fpm reload',
       hasstatus => true,
       require   => Package['php5-fpm'],
+      subscribe => [
+			Php::Config["php-fpm"],
+			File['/etc/php5/fpm/php-fpm.conf']
+		   ]
     }
 
     file { '/etc/php5/fpm/php-fpm.conf':

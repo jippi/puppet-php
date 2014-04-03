@@ -27,13 +27,20 @@
 # Copyright 2012-2013 Christian "Jippi" Winther, unless otherwise noted.
 #
 define php::cli::config(
+  $ensure   = 'present',
   $file = $php::cli::params::inifile,
-  $config
+  $config   = undef,
+  $section  = undef,
+  $setting  = undef,
+  $value    = undef,
 ) {
 
   php::config { "cli-${name}":
-    file   => $file,
-    config => $config
+    file    => $file,
+    config  => $config,
+    section => $section,
+    setting => $setting,
+    value   => $value,
   }
 
 }

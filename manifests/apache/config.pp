@@ -27,14 +27,22 @@
 # Copyright 2012-2013 Christian "Jippi" Winther, unless otherwise noted.
 #
 define php::apache::config(
-  $file = $php::apache::params::inifile,
-  $config
+  $ensure   = 'present',
+  $file     = $php::apache::params::inifile,
+  $config   = undef,
+  $setting  = undef,
+  $section  = undef,
+  $value    = undef,
 ) {
 
   php::config { "apache-${name}":
-    file      => $file,
-    config    => $config,
-    notify    => Service[$php::apache::params::service_name]
+    ensure  => $ensure,
+    file    => $file,
+    config  => $config,
+    section => $section,
+    setting => $setting,
+    value   => $value,
+    notify  => Service[$php::apache::params::service_name]
   }
 
 }

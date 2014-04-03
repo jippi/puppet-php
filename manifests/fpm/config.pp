@@ -26,17 +26,24 @@
 #
 # Copyright 2012-2013 Christian "Jippi" Winther, unless otherwise noted.
 #
-include php::fpm::params
 
 define php::fpm::config(
-  $file 	= $::php::fpm::params::inifile,
-  $config
+  $ensure   = 'present',
+  $file     = $php::fpm::params::inifile,
+  $config   = undef,
+  $setting  = undef,
+  $section  = undef,
+  $value    = undef,
 ) {
 
   php::config { "fpm-${name}":
-    file      => $file,
-    config    => $config,
-    notify    => Service[$::php::fpm::params::service_name]
+    ensure  => $ensure,
+    file    => $file,
+    config  => $config,
+    section => $section,
+    setting => $setting,
+    value   => $value,
+    notify  => Service[$::php::fpm::params::service_name]
   }
 
 }

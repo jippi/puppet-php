@@ -32,21 +32,30 @@
 # Copyright 2012-2014 Christian "Jippi" Winther, unless otherwise noted.
 #
 define php::config(
-  $file,
-  $config
+  $ensure   = 'present',
+  $file     = "${::php::config_root}/conf.d/${title}.ini",
+  $config   = undef,
+  $section  = undef,
+  $setting  = undef,
+  $value    = undef,
 ) {
 
-  validate_array($config)
+  if $config {
 
-  include php::augeas
-  include php::params
+    php::config::augeas { $title:
+      file   => $file,
+      config => $config,
+    }
 
-  augeas { "php-${name}-config":
-    incl      => $file,
-    changes   => $config,
-    load_path => $::php::params::augeas_contrib_dir,
-    lens      => 'PHP.lns',
-    require   => Class['php::augeas']
+  } else {
+    validate_re($ensure, '(absent|present)', "${module_name}'s php::config: ensure must either be 'absent' or 'present' on ${::fqdn}")
+
+    php::config::dwim { $title:
+      ensure  => $ensure,
+      file    => $file,
+      section => $section,
+      setting => $setting,
+      value   => $value,
+    }
   }
-
 }

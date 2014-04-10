@@ -32,6 +32,7 @@ define php::fpm::pool (
   $pm_min_spare_servers = '5',
   $pm_max_spare_servers = '35',
   $pm_max_requests = '0',
+  $pm_process_idle_timeout = '10s',
   $pm_status_path = undef,
   $ping_path = undef,
   $ping_response = 'pong',

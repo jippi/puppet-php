@@ -4,20 +4,14 @@ define php::config::dwim (
   $config   = undef,
   $setting  = undef,
   $ensure   = 'present',
-  $section  = undef,
+  $section  = 'PHP',
   $value    = undef,
 ) {
-  # parse title
-  if $title =~ /([^=]+)\s*=\s*(.+)/ and $setting == nil and $value == nil {
-    $real_setting = regsubst($title, '([^=]+)\s*=\s*.+', '\1')
-    $real_value   = regsubst($title, '[^=]+\s*=\s*(.+)', '\1')
-  } elsif $title =~ /\S+/ and $setting == nil and $value != nil {
-    $real_setting = $title
-    $real_value =   $value
-  } elsif $setting != nil and $value != nil {
-    $real_setting = $setting
-    $real_value = $value
-  } else {
+  $real_setting = pick($setting, $title, regsubst($title, '([^=]+)\s*=\s*.+', '\1'))
+  $real_value   = pick($value,           regsubst($title, '[^=]+\s*=\s*(.+)', '\1'))
+
+
+  if $real_setting == nil or $real_value == nil {
     fail ("${module_name}'s php::config: need a valid value and a valid setting. (on node ${::fqdn}).")
   }
 

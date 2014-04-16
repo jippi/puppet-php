@@ -31,18 +31,21 @@ define php::apache::config(
   $file     = $php::apache::params::inifile,
   $config   = undef,
   $setting  = undef,
-  $section  = undef,
+  $section  = 'PHP',
   $value    = undef,
 ) {
 
-  php::config { "apache-${name}":
+  include ::php::apache::params
+
+  php::config { $title:
     ensure  => $ensure,
     file    => $file,
     config  => $config,
     section => $section,
     setting => $setting,
     value   => $value,
-    notify  => Service[$php::apache::params::service_name]
+    notify  => Service[$php::apache::params::service_name],
+    souce   => 'apache',
   }
 
 }

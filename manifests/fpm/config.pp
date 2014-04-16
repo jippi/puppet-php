@@ -32,20 +32,21 @@ define php::fpm::config(
   $file     = $php::fpm::params::inifile,
   $config   = undef,
   $setting  = undef,
-  $section  = undef,
+  $section  = 'PHP',
   $value    = undef,
 ) {
 
   include ::php::fpm::params
 
-  php::config { "fpm-${name}":
+  php::config { $title:
     ensure  => $ensure,
     file    => $file,
     config  => $config,
     section => $section,
     setting => $setting,
     value   => $value,
-    notify  => Service[$::php::fpm::params::service_name]
+    notify  => Service[$::php::fpm::params::service_name],
+    source  => 'fpm',
   }
 
 }

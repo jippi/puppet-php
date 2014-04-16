@@ -32,17 +32,25 @@
 # Copyright 2012-2014 Christian "Jippi" Winther, unless otherwise noted.
 #
 define php::config(
+  $file,
   $ensure   = 'present',
-  $file     = "${::php::config_root}/conf.d/${title}.ini",
   $config   = undef,
-  $section  = undef,
+  $section  = 'PHP',
   $setting  = undef,
   $value    = undef,
+  $source   = undef,
 ) {
+
+  include ::php
 
   if $config {
 
-    php::config::augeas { $title:
+    $unique_title = $source ? {
+      undef   => $title,
+      default => "${source}-${title}",
+    }
+
+    php::config::augeas { $unique_title:
       file   => $file,
       config => $config,
     }

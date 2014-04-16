@@ -1,6 +1,6 @@
 # define a wrapper for dwim settings to have less clutter
 define php::config::dwim (
-  $file     = "${::php::config_root}/php.ini",
+  $file,
   $config   = undef,
   $setting  = undef,
   $ensure   = 'present',

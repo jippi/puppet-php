@@ -5,7 +5,7 @@ describe 'php::fpm::config' do
   context 'valid config' do
     let(:title) { 'unique-name' }
     let(:params) {{
-      :file   => '/etc/php5/conf.d/unique-name.ini',
+      :file   => '/etc/php5/fpm/conf.d/unique-name.ini',
       :config => [
         'set .anon/apc.enabled 1'
       ]
@@ -13,22 +13,22 @@ describe 'php::fpm::config' do
 
     it { should contain_php__fpm__config('unique-name')
       .with({
-        'file'    => '/etc/php5/conf.d/unique-name.ini',
+        'file'    => '/etc/php5/fpm/conf.d/unique-name.ini',
         'config'  => ['set .anon/apc.enabled 1']
       })
     }
 
     it { should contain_php__config('fpm-unique-name')
       .with({
-        'file'    => '/etc/php5/conf.d/unique-name.ini',
+        'file'    => '/etc/php5/fpm/conf.d/unique-name.ini',
         'config'  => ['set .anon/apc.enabled 1']
       })
-      .that_notifies('php5-fpm')
+      .that_notifies('Service[php5-fpm]')
     }
 
     it { should contain_augeas("php-fpm-unique-name-config")
       .with({
-        'file'    => '/etc/php5/conf.d/unique-name.ini',
+        'incl'    => '/etc/php5/fpm/conf.d/unique-name.ini',
         'changes' => "set .anon/apc.enabled 1"
       })
     }
@@ -38,7 +38,7 @@ describe 'php::fpm::config' do
   context 'invalid config (string)' do
     let(:title) { 'unique-name' }
     let(:params) {{
-      :file => '/etc/php5/conf.d/unique-name.ini',
+      :file => '/etc/php5/fpm/conf.d/unique-name.ini',
       :config => 'hello world'
     }}
 
@@ -57,6 +57,5 @@ describe 'php::fpm::config' do
       })
     }
   end
-
 
 end

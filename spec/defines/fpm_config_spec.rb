@@ -45,4 +45,18 @@ describe 'php::fpm::config' do
     it { expect { should raise_error(Puppet::Error) }}
   end
 
+  context 'dwim config style' do
+    let(:title) { 'upload_max_filesize=20M' }
+
+    it { should contain_ini_setting("upload_max_filesize=20 in /etc/php5/fpm/php.ini")
+      .with({
+        'path'    => '/etc/php5/fpm/php.ini',
+        'section' => 'PHP',
+        'setting' => 'upload_max_filesize',
+        'value'   => '20M',
+      })
+    }
+  end
+
+
 end

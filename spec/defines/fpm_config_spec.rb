@@ -21,9 +21,9 @@ describe 'php::fpm::config' do
     it { should contain_php__config('fpm-unique-name')
       .with({
         'file'    => '/etc/php5/fpm/conf.d/unique-name.ini',
-        'config'  => ['set .anon/apc.enabled 1']
+        'config'  => ['set .anon/apc.enabled 1'],
+        'notify'  => 'Service[php5-fpm]',
       })
-      .that_notifies('Service[php5-fpm]')
     }
 
     it { should contain_augeas("php-fpm-unique-name-config")

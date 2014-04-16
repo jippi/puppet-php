@@ -36,6 +36,8 @@ define php::fpm::config(
   $value    = undef,
 ) {
 
+  include ::php::fpm::params
+
   php::config { "fpm-${name}":
     ensure  => $ensure,
     file    => $file,

@@ -7,9 +7,8 @@ define php::config::dwim (
   $section  = 'PHP',
   $value    = undef,
 ) {
-  $real_setting = pick($setting, $title, regsubst($title, '([^=]+)\s*=\s*.+', '\1'))
-  $real_value   = pick($value,           regsubst($title, '[^=]+\s*=\s*(.+)', '\1'))
-
+  $real_setting = pick($setting, regsubst($title, '([^=]+)\s*=\s*.+', '\1'), $title)
+  $real_value   = pick($value,   regsubst($title, '[^=]+\s*=\s*(.+)', '\1'))
 
   if $real_setting == nil or $real_value == nil {
     fail ("${module_name}'s php::config: need a valid value and a valid setting. (on node ${::fqdn}).")

@@ -29,13 +29,12 @@
 
 define php::fpm::config(
   $ensure   = 'present',
-  $file     = $php::fpm::params::inifile,
+  $file     = $::php::fpm::params::inifile,
   $config   = undef,
   $setting  = undef,
   $section  = 'PHP',
   $value    = undef,
 ) {
-
   include ::php::fpm::params
 
   php::config { $title:
@@ -48,5 +47,4 @@ define php::fpm::config(
     notify  => Service[$::php::fpm::params::service_name],
     source  => 'fpm',
   }
-
 }

@@ -58,6 +58,7 @@ define php::config(
   } else {
     validate_re($ensure, '(absent|present)', "${module_name}'s php::config: ensure must either be 'absent' or 'present' on ${::fqdn}")
 
+
     php::config::dwim { $title:
       ensure  => $ensure,
       file    => $file,

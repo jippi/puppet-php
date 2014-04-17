@@ -33,20 +33,38 @@
 #
 define php::config(
   $file,
-  $config
+  $ensure   = 'present',
+  $config   = undef,
+  $section  = 'PHP',
+  $setting  = undef,
+  $value    = undef,
+  $source   = undef,
 ) {
 
-  validate_array($config)
+  include ::php
 
-  include php::augeas
-  include php::params
+  if $config {
 
-  augeas { "php-${name}-config":
-    incl      => $file,
-    changes   => $config,
-    load_path => $::php::params::augeas_contrib_dir,
-    lens      => 'PHP.lns',
-    require   => Class['php::augeas']
+    $unique_title = $source ? {
+      undef   => $title,
+      default => "${source}-${title}",
+    }
+
+    php::config::augeas { $unique_title:
+      file   => $file,
+      config => $config,
+    }
+
+  } else {
+    validate_re($ensure, '(absent|present)', "${module_name}'s php::config: ensure must either be 'absent' or 'present' on ${::fqdn}")
+
+
+    php::config::dwim { $title:
+      ensure  => $ensure,
+      file    => $file,
+      section => $section,
+      setting => $setting,
+      value   => $value,
+    }
   }
-
 }

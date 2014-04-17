@@ -30,17 +30,18 @@ define php::cli::config(
   $ensure   = 'present',
   $file = $php::cli::params::inifile,
   $config   = undef,
-  $section  = undef,
+  $section  = 'PHP',
   $setting  = undef,
   $value    = undef,
 ) {
 
-  php::config { "cli-${name}":
+  php::config { $title:
     file    => $file,
     config  => $config,
     section => $section,
     setting => $setting,
     value   => $value,
+    source  => 'cli',
   }
 
 }

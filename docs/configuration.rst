@@ -34,7 +34,7 @@ Example code, configuring PHP APC to be enabled and use more memory than default
     ]
   }
 
-Alternatively this configuration an be achieved with with our ``dwim`` interface:
+Alternatively this configuration an be achieved with with our ``dwim`` (Do what I mean) interface:
 
 .. code-block:: puppet
 
@@ -63,6 +63,14 @@ Or.. more verbosely:
     file    => '/path/to/the/ini/file',
     section => 'APC',
   }
+
+but it's more useful for terse settings such as:
+
+.. code-block:: puppet
+
+  php::apache::config { 'upload_max_filesize=20M': }
+
+.. code-block:: puppet
 
 php::fpm::config
 ################

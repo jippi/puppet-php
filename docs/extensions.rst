@@ -229,22 +229,22 @@ Class name: ``php::extension::ssh2``.
 
 * ``$inifile`` defaults to ``${php::params::config_root_ini}/ssh2.ini``
 
-uploadprogess
+uploadprogress
 -------------
 
 .. note::
 
   The package requires the ``build-essential`` and ``php5-dev`` system packages.
 
-Class name: ``php::extension::uploadprogess``.
+Class name: ``php::extension::uploadprogress``.
 
-* ``$package`` defaults to ``uploadprogess``
+* ``$package`` defaults to ``uploadprogress``
 
 * ``$provider`` defaults to ``pecl``
 
-* ``$inifile`` defaults to ``${php::params::config_root_ini}/uploadprogess.ini``
+* ``$inifile`` defaults to ``${php::params::config_root_ini}/uploadprogress.ini``
 
-* ``$settings`` defaults to ``['set ".anon/extension" "uploadprogess.so"']``
+* ``$settings`` defaults to ``['set ".anon/extension" "uploadprogress.so"']``
 
 xcache
 ------

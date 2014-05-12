@@ -45,7 +45,7 @@ define php::apache::config(
     setting => $setting,
     value   => $value,
     notify  => Service[$php::apache::params::service_name],
-    souce   => 'apache',
+    source  => 'apache',
   }
 
 }

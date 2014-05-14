@@ -1,16 +1,16 @@
-# Define: php::fpm::conf
+# Define: php::fpm::pool
 #
 # PHP FPM pool configuration definition. Note that the original php-fpm package
 # includes a pre-configured one called 'www' so you should either use that name
 # in order to override it, or "ensure => absent" it.
 #
 # Sample Usage:
-#  php::fpm::conf { 'www': ensure => absent }
-#  php::fpm::conf { 'customer1':
+#  php::fpm::pool { 'www': ensure => absent }
+#  php::fpm::pool { 'customer1':
 #      listen => '127.0.0.1:9001',
 #      user   => 'customer1',
 #  }
-#  php::fpm::conf { 'customer2':
+#  php::fpm::pool { 'customer2':
 #      listen => '127.0.0.1:9002',
 #      user   => 'customer2',
 #  }

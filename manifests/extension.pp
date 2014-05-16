@@ -69,6 +69,7 @@ define php::extension(
     package { $package:
       ensure   => $ensure,
       provider => $provider,
+      source   => $source,
       pipe     => $pipe;
     }
   } elsif $provider == 'dpkg' {

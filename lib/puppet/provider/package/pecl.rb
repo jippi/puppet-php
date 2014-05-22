@@ -21,7 +21,7 @@ Puppet::Type.type(:package).provide :pecl, :parent => Puppet::Provider::Package 
       list = execute(command).split("\n")
       list = list.collect do |set|
         if hash[:justme]
-          if /^#{hash[:justme]}/i.match(set)
+          if /^#{hash[:justme]}$/i.match(set)
             if pearhash = pearsplit(set)
               pearhash[:provider] = :pearcmd
               pearhash

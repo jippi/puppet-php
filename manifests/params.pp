@@ -31,7 +31,11 @@ class php::params {
 
   $config_root = '/etc/php5'
 
-  $config_root_ini = "${::php::params::config_root}/mods-available"
+  if $::php_version == '' or versioncmp($::php_version, '5.4') >= 0 {
+    $config_root_ini = "${::php::params::config_root}/mods-available"
+  } else {
+    $config_root_ini = "${::php::params::config_root}/conf.d"
+  }
 
   $augeas_contrib_dir = '/usr/share/augeas/lenses/contrib'
 

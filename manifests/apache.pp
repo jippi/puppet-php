@@ -63,10 +63,4 @@ class php::apache(
     config  => $settings
   }
 
-  service { 'httpd':
-    ensure => running,
-    enable => true,
-    name   => $service_name,
-  }
-
 }

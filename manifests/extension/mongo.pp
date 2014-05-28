@@ -61,4 +61,11 @@ class php::extension::mongo(
     file    => $inifile,
     config  => $settings
   }
+  
+  if $::php_version == '' or versioncmp($::php_version, '5.4') >= 0 {
+    file { "${::php::params::config_root}/conf.d/20-mongo.ini" :
+      ensure => link,
+      target => "${::php::params::config_root_ini}/mongo.ini"
+    }
+  }
 }

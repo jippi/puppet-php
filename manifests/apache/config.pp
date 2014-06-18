@@ -28,7 +28,7 @@
 #
 define php::apache::config(
   $ensure   = 'present',
-  $file     = $php::apache::params::inifile,
+  $file     = undef,
   $config   = undef,
   $setting  = undef,
   $section  = 'PHP',
@@ -37,9 +37,15 @@ define php::apache::config(
 
   include ::php::apache::params
 
+  if $file {
+    $file_real = $file
+  } else {
+    $file_real = $php::apache::params::inifile
+  }
+
   php::config { $title:
     ensure  => $ensure,
-    file    => $file,
+    file    => $file_real,
     config  => $config,
     section => $section,
     setting => $setting,

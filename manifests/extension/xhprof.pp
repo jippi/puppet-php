@@ -1,6 +1,6 @@
-# == Class: php::extension::uploadprogress
+# == Class: php::extension::xhprof
 #
-# Install the PHP uploadprogress extension
+# Install and configure the xhprof PHP extension
 #
 # === Parameters
 #
@@ -28,11 +28,7 @@
 #
 # === Examples
 #
-#  include 'php::extension::uploadprogress'
-#
-#  class {'php::extension::uploadprogress':
-#   ensure => latest
-#  }
+#  include php::extension::xhprof
 #
 # === Authors
 #
@@ -42,23 +38,22 @@
 #
 # Copyright 2012-2013 Christian "Jippi" Winther, unless otherwise noted.
 #
-class php::extension::uploadprogress(
-  $ensure   = $php::extension::uploadprogress::params::ensure,
-  $package  = $php::extension::uploadprogress::params::package,
-  $provider = $php::extension::uploadprogress::params::provider,
-  $inifile  = $php::extension::uploadprogress::params::inifile,
-  $settings = $php::extension::uploadprogress::params::settings
-) inherits php::extension::uploadprogress::params {
+class php::extension::xhprof(
+  $ensure   = $php::extension::xhprof::params::ensure,
+  $package  = $php::extension::xhprof::params::package,
+  $provider = $php::extension::xhprof::params::provider,
+  $inifile  = $php::extension::xhprof::params::inifile,
+  $settings = $php::extension::xhprof::params::settings
+) inherits php::extension::xhprof::params {
 
-  php::extension { 'uploadprogress':
+  php::extension { 'xhprof':
     ensure   => $ensure,
     package  => $package,
     provider => $provider
   }
 
-  php::config { 'php-extension-uploadprogress':
+  php::config { 'php-extension-xhprof':
     file    => $inifile,
     config  => $settings
   }
-
 }

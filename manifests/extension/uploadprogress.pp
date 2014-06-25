@@ -44,7 +44,7 @@
 #
 class php::extension::uploadprogress(
   $ensure   = $php::extension::uploadprogress::params::ensure,
-  $package  = $php::extension::uploadprogress::params,
+  $package  = $php::extension::uploadprogress::params::package,
   $provider = $php::extension::uploadprogress::params::provider,
   $inifile  = $php::extension::uploadprogress::params::inifile,
   $settings = $php::extension::uploadprogress::params::settings

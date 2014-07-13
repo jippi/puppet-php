@@ -49,7 +49,7 @@ gd
 
 Class name: ``php::extension::gd``.
 
-* ``$package`` defaults to ``php5-curl``
+* ``$package`` defaults to ``php5-gd``
 
 * ``$inifile`` defaults to ``${php::params::config_root_ini}/gd.ini``
 

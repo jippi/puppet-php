@@ -126,6 +126,23 @@ Class name: ``php::extension::ldap``.
 
 * ``$inifile`` defaults to ``${php::params::config_root_ini}/ldap.ini``
 
+mailparse
+--------
+
+.. note::
+
+  The package requires the ``build-essential`` and ``php5-dev`` system packages.
+
+Class name: ``php::extension::mailparse``.
+
+* ``$package`` defaults to ``mailparse``
+
+* ``$provider`` defaults to ``pecl``
+
+* ``$inifile`` defaults to ``${php::params::config_root_ini}/mailparse.ini``
+
+* ``$settings`` defaults to ``['set ".anon/extension" "mailparse.so"']``
+
 mcrypt
 ------
 

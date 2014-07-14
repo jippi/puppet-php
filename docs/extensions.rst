@@ -192,6 +192,15 @@ Class name: ``php::extension::newrelic``.
 
 * ``$inifile`` defaults to ``${php::params::config_root_ini}/newrelic.ini``
 
+oauth
+-----
+
+Class name: ``php::extension::oauth``.
+
+* ``$package`` defaults to ``php5-oauth``
+
+* ``$inifile`` defaults to ``${php::params::config_root_ini}/oauth.ini``
+
 opcache
 -------
 

@@ -53,7 +53,8 @@ class php::fpm(
 
   php::fpm::config { 'php-fpm':
     file    => $inifile,
-    config  => $settings
+    config  => $settings,
+    require => Package[$package]
   }
 
 }

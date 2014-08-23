@@ -61,12 +61,14 @@ class php::fpm(
     service_name => $service_name,
     ensure => $service_ensure,
     enable => $service_enable,
-    has_status => $service_has_status
+    has_status => $service_has_status,
+    require => Package[$package]
   }
 
   php::fpm::config { 'php-fpm':
     file    => $inifile,
-    config  => $settings
+    config  => $settings,
+    require => Package[$package]
   }
 
 }

@@ -78,7 +78,7 @@ FPM
     }
 
     create_resources('php::fpm::pool',  hiera_hash('php_fpm_pool', {}))
-    create_resources('php::fpm::config',  hiera_hash('php_fpm_config', []))
+    create_resources('php::fpm::config',  hiera_hash('php_fpm_config', {}))
 
     Php::Extension <| |> ~> Service['php5-fpm']
 

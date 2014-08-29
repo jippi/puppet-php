@@ -40,16 +40,30 @@
 # Copyright 2012-2013 Christian "Jippi" Winther, unless otherwise noted.
 #
 class php::fpm(
-  $ensure       = $php::fpm::params::ensure,
-  $package      = $php::fpm::params::package,
-  $provider     = $php::fpm::params::provider,
-  $inifile      = $php::fpm::params::inifile,
-  $settings     = $php::fpm::params::settings,
-  $service_name = $php::fpm::params::service_name
+  $ensure             = $php::fpm::params::ensure,
+  $package            = $php::fpm::params::package,
+  $provider           = $php::fpm::params::provider,
+  $inifile            = $php::fpm::params::inifile,
+  $settings           = $php::fpm::params::settings,
+  $service_name       = $php::fpm::params::service_name,
+  $service_ensure     = $php::fpm::params::service_ensure,
+  $service_enable     = $php::fpm::params::service_enable,
+  $service_has_status = $php::fpm::params::service_has_status
 ) inherits php::fpm::params {
 
-  include php::fpm::package
-  include php::fpm::service
+  class  { 'php::fpm::package':
+    package_name => $package,
+    package_ensure => $ensure,
+    package_provider => $provider
+  }
+
+  class  { "php::fpm::service":
+    service_name => $service_name,
+    ensure => $service_ensure,
+    enable => $service_enable,
+    has_status => $service_has_status,
+    require => Package[$package]
+  }
 
   php::fpm::config { 'php-fpm':
     file    => $inifile,

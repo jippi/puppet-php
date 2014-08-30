@@ -51,10 +51,10 @@ class php::extension::xdebug (
     package  => $package,
     provider => $provider
   }
-
+  ->
   php::config { 'php-extension-xdebug':
-    file    => $inifile,
-    config  => $settings
+    file   => $inifile,
+    config => $settings
   }
 
 }

@@ -39,6 +39,8 @@ define php::fpm::pool (
   $request_terminate_timeout = '0',
   $request_slowlog_timeout = '0',
   $slowlog = "/var/log/php-fpm/${name}-slow.log",
+  $access_log = undef,
+  $access_log_format = undef,
   $rlimit_files = undef,
   $rlimit_core = undef,
   $chroot = undef,

@@ -53,6 +53,7 @@ define php::fpm::pool (
   $php_admin_value = {},
   $php_admin_flag = {},
   $php_directives = [],
+  $log_errors = true,
   $error_log = true
 ) {
 

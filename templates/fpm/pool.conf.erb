@@ -260,7 +260,7 @@ env[<%= key %>] = <%= value %>
 php_admin_flag[log_errors] = on
   <% if @error_log == true %>
 php_admin_value[error_log] = /var/log/php-fpm-<%= @pool -%>-error.log
-  <% else %>
+  <% elsif @error_log.is_a? String %>
 php_admin_value[error_log] = <%= @error_log %>
   <% end %>
 <% else %>

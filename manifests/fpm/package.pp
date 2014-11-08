@@ -1,3 +1,7 @@
+# == Class: php::fpm::package
+#
+# This "private" class manages the fpm service
+#
 class php::fpm::package(
   $package_name,
   $package_ensure,

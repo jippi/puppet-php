@@ -53,8 +53,8 @@ class php::extension::ssh2(
   }
 
   php::config { 'php-extension-ssh2':
-    file    => $inifile,
-    config  => $settings
+    file   => $inifile,
+    config => $settings
   }
 
 }

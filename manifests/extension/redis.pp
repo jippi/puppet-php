@@ -47,8 +47,8 @@ class php::extension::redis(
   }
 
   php::config { 'php-extension-redis':
-    file    => $inifile,
-    config  => $settings
+    file   => $inifile,
+    config => $settings
   }
 
 }

@@ -53,8 +53,8 @@ class php::extension::mcrypt(
   }
 
   php::config { 'php-extension-mcrypt':
-    file    => $inifile,
-    config  => $settings
+    file   => $inifile,
+    config => $settings
   }
 
 }

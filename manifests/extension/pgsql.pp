@@ -53,7 +53,7 @@ class php::extension::pgsql(
   }
 
   php::config { 'php-extension-pgsql':
-    file    => $inifile,
-    config  => $settings
+    file   => $inifile,
+    config => $settings
   }
 }

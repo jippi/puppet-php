@@ -58,7 +58,7 @@ class php::extension::mongo(
   }
 
   php::config { 'php-extension-mongo':
-    file    => $inifile,
-    config  => $settings
+    file   => $inifile,
+    config => $settings
   }
 }

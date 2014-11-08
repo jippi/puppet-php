@@ -53,8 +53,8 @@ class php::extension::mysql(
   }
 
   php::config { 'php-extension-mysql':
-    file    => $inifile,
-    config  => $settings
+    file   => $inifile,
+    config => $settings
   }
 
 }

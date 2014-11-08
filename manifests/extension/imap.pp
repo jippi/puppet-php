@@ -53,7 +53,7 @@ class php::extension::imap(
   }
 
   php::config { 'php-extension-imap':
-    file    => $inifile,
-    config  => $settings
+    file   => $inifile,
+    config => $settings
   }
 }

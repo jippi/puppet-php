@@ -53,8 +53,8 @@ class php::extension::imagick(
   }
 
   php::config { 'php-extension-imagick':
-    file    => $inifile,
-    config  => $settings
+    file   => $inifile,
+    config => $settings
   }
 
 }

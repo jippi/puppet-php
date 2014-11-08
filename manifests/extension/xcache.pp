@@ -53,8 +53,8 @@ class php::extension::xcache(
   }
 
   php::config { 'php-extension-xcache':
-    file    => $inifile,
-    config  => $settings
+    file   => $inifile,
+    config => $settings
   }
 
 }

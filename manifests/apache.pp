@@ -59,8 +59,8 @@ class php::apache(
   }
 
   php::apache::config { 'php-apache':
-    file    => $inifile,
-    config  => $settings
+    file   => $inifile,
+    config => $settings
   }
 
 }

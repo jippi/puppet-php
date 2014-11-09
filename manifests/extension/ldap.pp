@@ -53,7 +53,7 @@ class php::extension::ldap(
   }
 
   php::config { 'php-extension-ldap':
-    file    => $inifile,
-    config  => $settings
+    file   => $inifile,
+    config => $settings
   }
 }

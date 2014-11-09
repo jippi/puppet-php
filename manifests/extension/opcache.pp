@@ -55,8 +55,8 @@ class php::extension::opcache(
   }
 
   php::config { 'php-extension-opcache':
-    file    => $inifile,
-    config  => $settings
+    file   => $inifile,
+    config => $settings
   }
 
 }

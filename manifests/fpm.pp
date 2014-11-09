@@ -52,17 +52,17 @@ class php::fpm(
 ) inherits php::fpm::params {
 
   class  { 'php::fpm::package':
-    package_name => $package,
-    package_ensure => $ensure,
+    package_name     => $package,
+    package_ensure   => $ensure,
     package_provider => $provider
   }
 
-  class  { "php::fpm::service":
+  class  { 'php::fpm::service':
+    ensure       => $service_ensure,
     service_name => $service_name,
-    ensure => $service_ensure,
-    enable => $service_enable,
-    has_status => $service_has_status,
-    require => Package[$package]
+    enable       => $service_enable,
+    has_status   => $service_has_status,
+    require      => Package[$package]
   }
 
   php::fpm::config { 'php-fpm':

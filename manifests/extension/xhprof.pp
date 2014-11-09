@@ -53,7 +53,7 @@ class php::extension::xhprof(
   }
 
   php::config { 'php-extension-xhprof':
-    file    => $inifile,
-    config  => $settings
+    file   => $inifile,
+    config => $settings
   }
 }

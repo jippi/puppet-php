@@ -54,7 +54,8 @@ define php::fpm::pool (
   $php_admin_flag = {},
   $php_directives = [],
   $log_errors = true,
-  $error_log = true
+  $error_log = true,
+  $config_mode = '0644',
 ) {
 
   $pool = $title
@@ -75,7 +76,7 @@ define php::fpm::pool (
       content => template('php/fpm/pool.conf.erb'),
       owner   => root,
       group   => root,
-      mode    => '0644'
+      mode    => $config_mode,
     }
   }
 

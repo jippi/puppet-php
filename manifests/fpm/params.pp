@@ -50,5 +50,6 @@ class php::fpm::params inherits php::params {
   $service_ensure     = 'running'
   $service_enable     = true
   $service_has_status = true
+  $service_provider   = undef
 
 }

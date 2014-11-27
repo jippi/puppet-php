@@ -48,7 +48,8 @@ class php::fpm(
   $service_name       = $php::fpm::params::service_name,
   $service_ensure     = $php::fpm::params::service_ensure,
   $service_enable     = $php::fpm::params::service_enable,
-  $service_has_status = $php::fpm::params::service_has_status
+  $service_has_status = $php::fpm::params::service_has_status,
+  $service_provider   = $php::fpm::params::service_provider  
 ) inherits php::fpm::params {
 
   class  { 'php::fpm::package':
@@ -60,6 +61,7 @@ class php::fpm(
   class  { 'php::fpm::service':
     ensure       => $service_ensure,
     service_name => $service_name,
+    provider     => $service_provider,
     enable       => $service_enable,
     has_status   => $service_has_status,
     require      => Package[$package]

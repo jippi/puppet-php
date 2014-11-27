@@ -7,13 +7,15 @@ class php::fpm::service(
   $ensure,
   $enable,
   $has_status,
+  $provider
 ) {
 
   service { $service_name:
     ensure    => $ensure,
     enable    => $enable,
     restart   => "service ${service_name} reload",
-    hasstatus => $has_status
+    hasstatus => $has_status,
+    provider  => $provider
   }
 
 }

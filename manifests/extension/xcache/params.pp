@@ -43,7 +43,7 @@ class php::extension::xcache::params {
   $ensure   = $php::params::ensure
   $package  = 'php5-xcache'
   $provider = undef
-  $inifile  = '/etc/php5/conf.d/20-xcache.ini'
+  $inifile  = "${php::params::config_root_ini}/xcache.ini"
   $settings = []
 
 }

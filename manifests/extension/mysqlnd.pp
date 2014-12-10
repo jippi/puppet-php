@@ -39,12 +39,12 @@
 # Copyright 2012-2013 Christian "Jippi" Winther, unless otherwise noted.
 #
 class php::extension::mysqlnd(
-  $ensure   = $php::extension::mysql::params::ensure,
-  $package  = $php::extension::mysql::params::package,
-  $provider = $php::extension::mysql::params::provider,
-  $inifile  = $php::extension::mysql::params::inifile,
-  $settings = $php::extension::mysql::params::settings,
-) inherits php::extension::mysql::params {
+  $ensure   = $php::extension::mysqlnd::params::ensure,
+  $package  = $php::extension::mysqlnd::params::package,
+  $provider = $php::extension::mysqlnd::params::provider,
+  $inifile  = $php::extension::mysqlnd::params::inifile,
+  $settings = $php::extension::mysqlnd::params::settings,
+) inherits php::extension::mysqlnd::params {
 
   php::extension { 'mysqlnd':
     ensure   => $ensure,

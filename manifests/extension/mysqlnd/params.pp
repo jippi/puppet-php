@@ -38,7 +38,7 @@
 #
 # Copyright 2012-2013 Christian "Jippi" Winther, unless otherwise noted.
 #
-class php::extension::mysql::params {
+class php::extension::mysqlnd::params {
 
   $ensure   = $php::params::ensure
   $package  = 'php5-mysqlnd'

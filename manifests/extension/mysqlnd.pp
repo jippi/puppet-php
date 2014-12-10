@@ -38,7 +38,7 @@
 #
 # Copyright 2012-2013 Christian "Jippi" Winther, unless otherwise noted.
 #
-class php::extension::mysql(
+class php::extension::mysqlnd(
   $ensure   = $php::extension::mysql::params::ensure,
   $package  = $php::extension::mysql::params::package,
   $provider = $php::extension::mysql::params::provider,

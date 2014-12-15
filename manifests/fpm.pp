@@ -70,6 +70,7 @@ class php::fpm(
   php::fpm::config { 'php-fpm':
     file    => $inifile,
     config  => $settings,
+    service_name => $service_name,
     require => Package[$package]
   }
 

@@ -22,9 +22,16 @@
 # [*inifile*]
 #   The path to the extension ini file
 #
+# [*pdo_inifile*]
+#   The path to the pdo extension ini file
+#
 # [*settings*]
 #   Hash with 'set' nested hash of key => value
 #   set changes to agues when applied to *inifile*
+#
+# [*pdo_settings*]
+#   Hash with 'set' nested hash of key => value
+#   set changes to agues when applied to *pod_inifile*
 #
 # === Examples
 #
@@ -40,10 +47,15 @@
 #
 class php::extension::mysql::params {
 
-  $ensure   = $php::params::ensure
-  $package  = 'php5-mysql'
-  $provider = undef
-  $inifile  = "${php::params::config_root_ini}/mysql.ini"
-  $settings = [ ]
+  $ensure       = $php::params::ensure
+  $package      = 'php5-mysql'
+  $provider     = undef
+  $inifile      = "${php::params::config_root_ini}/mysql.ini"
+  # these files the same for all mysql providers!
+  $pdo_inifile  = "${php::params::config_root_ini}/pdo_mysql.ini"
+  $mysqli_inifile  = "${php::params::config_root_ini}/mysqli.ini"
+  $settings     = [ ]
+  $pdo_settings = [ ]
+  $mysqli_settings = [ ]
 
 }

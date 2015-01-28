@@ -22,27 +22,35 @@
 ; Pid file
 ; Note: the default prefix is /var
 ; Default Value: none
-pid = /var/run/php5-fpm.pid
+pid = <%= @pid %>
 
 ; Error log file
 ; If it's set to "syslog", log is sent to syslogd instead of being written
 ; in a local file.
 ; Note: the default prefix is /var
 ; Default Value: log/php-fpm.log
-error_log = /var/log/php5-fpm.log
+error_log = <%= @error_log %>
 
 ; syslog_facility is used to specify what type of program is logging the
 ; message. This lets syslogd specify that messages from different facilities
 ; will be handled differently.
 ; See syslog(3) for possible values (ex daemon equiv LOG_DAEMON)
 ; Default Value: daemon
+<% if @syslog_facility %>
+syslog.facility = <%= @syslog_facility %>
+<% else %>
 ;syslog.facility = daemon
+<% end %>
 
 ; syslog_ident is prepended to every message. If you have multiple FPM
 ; instances running on the same server, you can change the default value
 ; which must suit common needs.
 ; Default Value: php-fpm
+<% if @syslog_ident %>
+syslog.ident = <%= @syslog_ident %>
+<% else %>
 ;syslog.ident = php-fpm
+<% end %>
 
 ; Log level
 ; Possible Values: alert, error, warning, notice, debug
@@ -74,7 +82,11 @@ process_control_timeout = <%= @process_control_timeout %>
 ; Use it with caution.
 ; Note: A value of 0 indicates no limit
 ; Default Value: 0
+<% if @process_max %>
+process.max = <%= @process_max %>
+<% else %>
 ; process.max = 128
+<% end %>
 
 ; Specify the nice(2) priority to apply to the master process (only if set)
 ; The value can vary from -19 (highest priority) to 20 (lower priority)
@@ -82,20 +94,25 @@ process_control_timeout = <%= @process_control_timeout %>
 ;       - The pool process will inherit the master process priority
 ;         unless it specified otherwise
 ; Default Value: no set
+<% if @process_priority %>
+process.priority = <%= @process_priority %>
+<% else %>
 ; process.priority = -19
+<% end %>
+
 
 ; Send FPM to background. Set to 'no' to keep FPM in foreground for debugging.
 ; Default Value: yes
-;daemonize = yes
+daemonize = <%= @daemonize %>
 
 ; Set open file descriptor rlimit for the master process.
 ; Default Value: system defined value
-;rlimit_files = 1024
+rlimit_files = <%= @rlimit_files %>
 
 ; Set max core size rlimit for the master process.
 ; Possible Values: 'unlimited' or an integer greater or equal to 0
 ; Default Value: system defined value
-;rlimit_core = 0
+rlimit_core = <%= @rlimit_core %>
 
 ; Specify the event mechanism FPM will use. The following is available:
 ; - select     (any POSIX os)
@@ -105,7 +122,12 @@ process_control_timeout = <%= @process_control_timeout %>
 ; - /dev/poll  (Solaris >= 7)
 ; - port       (Solaris >= 10)
 ; Default Value: not set (auto detection)
+<% if @events_mechanism %>
+events.mechanism = <%= @events_mechanism %>
+<% else %>
 ; events.mechanism = epoll
+<% end %>
+
 
 ;;;;;;;;;;;;;;;;;;;;
 ; Pool Definitions ;

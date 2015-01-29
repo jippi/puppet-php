@@ -49,7 +49,23 @@ class php::fpm(
   $service_ensure     = $php::fpm::params::service_ensure,
   $service_enable     = $php::fpm::params::service_enable,
   $service_has_status = $php::fpm::params::service_has_status,
-  $service_provider   = $php::fpm::params::service_provider  
+  $service_provider   = $php::fpm::params::service_provider,
+
+  # settings for php-fpm.conf
+  $pid                          = $php::fpm::params::pid,
+  $error_log                    = $php::fpm::params::error_log,
+  $syslog_facility              = $php::fpm::params::syslog_facility,
+  $syslog_ident                 = $php::fpm::params::syslog_ident,
+  $log_level                    = $php::fpm::params::log_level,
+  $emergency_restart_threshold  = $php::fpm::params::emergency_restart_threshold,
+  $emergency_restart_interval   = $php::fpm::params::emergency_restart_interval,
+  $process_control_timeout      = $php::fpm::params::process_control_timeout,
+  $process_max                  = $php::fpm::params::process_max,
+  $process_priority             = $php::fpm::params::process_priority,
+  $rlimit_files                 = $php::fpm::params::rlimit_files,
+  $rlimit_core                  = $php::fpm::params::rlimit_core,
+  $events_mechanism             = $php::fpm::params::events_mechanism,
+
 ) inherits php::fpm::params {
 
   class  { 'php::fpm::package':
@@ -72,6 +88,14 @@ class php::fpm(
     config  => $settings,
     service_name => $service_name,
     require => Package[$package]
+  }
+
+  file { '/etc/php5/fpm/php-fpm.conf':
+    notify  => Service[$service_name],
+    content => template('php/fpm/php-fpm.conf.erb'),
+    owner   => root,
+    group   => root,
+    mode    => '0644',
   }
 
 }

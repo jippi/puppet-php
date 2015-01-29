@@ -52,4 +52,20 @@ class php::fpm::params inherits php::params {
   $service_has_status = true
   $service_provider   = undef
 
+  # default params for php-fpm.conf, ported from php::fpm::daemon
+  $pid                          = '/var/run/php5-fpm.pid'
+  $error_log                    = '/var/log/php5-fpm.log'
+  $syslog_facility              = undef
+  $syslog_ident                 = undef
+  $log_level                    = 'notice'
+  $emergency_restart_threshold  = 0
+  $emergency_restart_interval   = 0
+  $process_control_timeout      = 0
+  $process_max                  = undef
+  $process_priority             = undef
+  $daemonize                    = true
+  $rlimit_files                 = 1024
+  $rlimit_core                  = 0
+  $events_mechanism             = undef
+
 }

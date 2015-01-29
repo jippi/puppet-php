@@ -27,8 +27,13 @@ Install PHP-FPM, PHP CLI and the APC extension with custom configuration.
 
   include php
 
-  class { ['php::fpm', 'php::cli']:
+  class { 'php::cli': }
 
+  class { 'php::fpm':
+    emergency_restart_threshold  => 5,
+    emergency_restart_interval   => '1m',
+    rlimit_files                 => 32768,
+    events_mechanism             => 'epoll'  
   }
 
   class { 'php::extension::apc':

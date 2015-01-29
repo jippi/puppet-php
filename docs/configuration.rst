@@ -81,7 +81,14 @@ modifications done through this function, ensures that PHP FPM is reloaded.
 .. note ::
 
   The default value for ``$file`` in this function is the actual PHP FPM
-  configuration file
+  configuration file, so be sure to require the PHP FPM package when calling
+  this function:
+  
+  .. code-block:: puppet
+  
+    php::fpm::config { 'upload_max_filesize=20M':
+      require => Package['php5-fpm'],
+    }
 
 php::apache::config
 ###################

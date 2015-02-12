@@ -20,7 +20,7 @@ time.
 
 .. note ::
 
-  This function do not trigger any refresh of services out of the box
+  This function does not trigger any refresh of services out of the box
 
 Example code, configuring PHP APC to be enabled and use more memory than default.
 
@@ -38,11 +38,11 @@ Alternatively this configuration an be achieved with with our ``dwim`` (Do what 
 
 .. code-block:: puppet
 
-  php::config { 'enabled=1'
+  php::config { 'enabled=1':
     file    => '/path/to/the/ini/file',
     section => 'APC',
   }
-  php::config { 'shm_size=64M'
+  php::config { 'shm_size=64M':
     file    => '/path/to/the/ini/file',
     section => 'APC',
   }
@@ -51,13 +51,13 @@ Or.. more verbosely:
 
 .. code-block:: puppet
 
-  php::config { 'Enable APC'
+  php::config { 'Enable APC':
     setting => 'enable',
     value   => '1'
     file    => '/path/to/the/ini/file',
     section => 'APC',
   }
-  php::config { 'Configure APC shm size'
+  php::config { 'Configure APC shm size':
     setting => 'shm_size',
     value   => '64M',
     file    => '/path/to/the/ini/file',

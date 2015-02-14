@@ -32,6 +32,7 @@ class php::phpunit (
 
   exec { 'download phpunit':
     command => "wget ${source} -O ${destination}",
+    ensure  => absent,
     creates => $destination,
     path    => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ],
     require => [

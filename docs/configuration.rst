@@ -34,7 +34,7 @@ Example code, configuring PHP APC to be enabled and use more memory than default
     ]
   }
 
-Alternatively this configuration an be achieved with with our ``dwim`` (Do what I mean) interface:
+Alternatively this configuration can be achieved with our ``dwim`` (Do what I mean) interface:
 
 .. code-block:: puppet
 

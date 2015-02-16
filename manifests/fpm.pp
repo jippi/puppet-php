@@ -73,7 +73,7 @@ class php::fpm(
     package_ensure   => $ensure,
     package_provider => $provider
   }
-  ->
+
   class  { 'php::fpm::service':
     ensure       => $service_ensure,
     service_name => $service_name,
@@ -82,7 +82,7 @@ class php::fpm(
     has_status   => $service_has_status,
     require      => Package[$package]
   }
-  ->
+
   php::fpm::config { 'php-fpm':
     file    => $inifile,
     config  => $settings,

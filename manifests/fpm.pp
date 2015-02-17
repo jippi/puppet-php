@@ -89,13 +89,14 @@ class php::fpm(
     service_name => $service_name,
     require => Package[$package]
   }
-  ->
+
   file { '/etc/php5/fpm/php-fpm.conf':
     notify  => Service[$service_name],
     content => template('php/fpm/php-fpm.conf.erb'),
     owner   => root,
     group   => root,
     mode    => '0644',
+    require => Package[$package]
   }
 
 }

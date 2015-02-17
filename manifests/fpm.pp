@@ -96,6 +96,7 @@ class php::fpm(
     owner   => root,
     group   => root,
     mode    => '0644',
+    require => Package[$package]
   }
 
 }

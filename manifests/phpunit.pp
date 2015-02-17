@@ -18,6 +18,8 @@
 #
 # Christian "Jippi" Winther <jippignu@gmail.com>
 # Tobias Nyholm <tobias@happyrecruiting.se>
+# Weston Ruter <weston@xwp.co>
+# Josh Betz <j@joshbetz.com>
 #
 # === Copyright
 #
@@ -25,16 +27,31 @@
 #
 
 class php::phpunit (
-  $ensure   = $php::phpunit::params::ensure,
-  $package  = $php::phpunit::params::package,
-  $provider = $php::phpunit::params::provider
+  $ensure      = $php::phpunit::params::ensure,
+  $source      = $php::phpunit::params::source,
+  $destination = $php::phpunit::params::destination
 ) inherits php::phpunit::params {
 
-  package { $package:
-    ensure    => $ensure,
-    provider  => $provider;
+  $en = $ensure ? {
+    'absent' => 'absent',
+    default  => 'present',
   }
 
-  Exec['php::pear::auto_discover'] -> Package[$package]
+  if ( 'absent' != $en ) {
+    exec { 'download phpunit':
+      command => "wget ${source} -O ${destination}",
+      creates => $destination,
+      path    => [ '/bin', '/sbin' , '/usr/bin', '/usr/sbin' ],
+      require => Package['php5-cli'],
+      before  => File[$destination]
+    }
+  }
+
+  file { $destination:
+    ensure  => $en,
+    mode    => '0555',
+    owner   => root,
+    group   => root
+  }
 
 }

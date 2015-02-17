@@ -7,3 +7,4 @@ spec/fixtures/
 .*.sw*
 
 .DS_Store
+.project

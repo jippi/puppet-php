@@ -5,7 +5,7 @@
 class php::fpm::package(
   $package_name,
   $package_ensure,
-  $package_provider
+  $package_provider = undef
 ) {
 
   package { $package_name:

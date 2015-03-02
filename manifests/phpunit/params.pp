@@ -12,21 +12,21 @@
 #   The ensure of the pear package to install
 #   Could be "latest", "installed" or a pinned verison
 #
-# [*package*]
-#   The package name for pear package
-#   For debian it's pear.phpunit.de/PHPUnit
+# [*source*]
+#   The URL to download PHPUnit PHAR
+#   Official URL is https://phar.phpunit.de/phpunit.phar
 #
-# [*provider*]
+# [*destination*]
 #   The provider used to install pear.phpunit.de/PHPUnit
-#   Could be "pecl", "apt" or any other OS package provider
+#   Recommended install location is /usr/local/bin/phpunit
 #
 #
 # === Examples
 #
-#  include 'php::pear::package'
+#  include 'php::phpunit'
 #
-#  class {'php::pear::package
-#   ensure => latest
+#  class {'php::phpunit
+#   destination => '/opt/phpunit'
 #  }
 #
 # === Authors
@@ -35,12 +35,11 @@
 #
 # === Copyright
 #
-# Copyright 2012-2013 Nodes, unless otherwise noted.
+# Copyright 2012-2015 Nodes, unless otherwise noted.
 #
 class php::phpunit::params inherits php::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'pear.phpunit.de/PHPUnit'
-  $provider = 'pear'
-
+  $source = 'https://phar.phpunit.de/phpunit.phar'
+  $destination = '/usr/local/bin/phpunit'
 }

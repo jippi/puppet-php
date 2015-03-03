@@ -33,6 +33,7 @@
 # === Authors
 #
 # Christian "Jippi" Winther <jippignu@gmail.com>
+# Goran Miskovic <schkovich@gmail.com>
 #
 # === Copyright
 #

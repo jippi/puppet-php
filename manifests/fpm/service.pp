@@ -7,7 +7,7 @@ class php::fpm::service(
   $ensure,
   $enable,
   $has_status,
-  $provider
+  $provider = undef
 ) {
 
   service { $service_name:

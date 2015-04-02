@@ -66,7 +66,8 @@ define php::fpm::pool (
   if ($ensure == 'absent') {
     file { "/etc/php5/fpm/pool.d/${pool}.conf":
       ensure => absent,
-      notify => Service['php5-fpm']
+      notify => Service['php5-fpm'],
+      require => Package['php5-fpm'],
     }
   } else {
     file { "/etc/php5/fpm/pool.d/${pool}.conf":

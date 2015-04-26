@@ -63,11 +63,6 @@ define php::extension(
   $provider = undef,
   $pipe     = undef,
   $source   = undef,
-  $sapis    = {
-    'cli' => {title => 'cli'},
-    'fpm' => {title => 'fpm'},
-    'apache2' => {title => 'apache2'}
-  },
   $priority = 20,
 ) {
 
@@ -77,6 +72,11 @@ define php::extension(
       provider => $provider,
       source   => $source,
       pipe     => $pipe;
+    }
+    $sapis    = {
+      'cli' => {title => 'cli'},
+      'fpm' => {title => 'fpm'},
+      'apache2' => {title => 'apache2'}
     }
     unless defined(Service[$php::fpm::params::service_name]) {
       $sapis = delete($sapis, 'fpm')

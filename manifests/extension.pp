@@ -78,17 +78,19 @@ define php::extension(
       source   => $source,
       pipe     => $pipe;
     }
-    $sapi_defaults = {
-      reqire    => Pakage[$package],
+    unless defined(Service[$php::fpm::params::service_name]) {
+      delete($sapis, 'fpm')
     }
-    create_resources('php::sapi', $sapis, $sapi_defaults)
+    unless defined(Package[$php::apache::params::package]) {
+      delete($sapis, 'apache2')
+    }
     $defaults = {
       extension => $package,
       ensure    => $ensure,
       priority  => $priority,
-      reqire    => Resource[$sapis],
+      reqire    => Package[$package],
     }
-    create_resources('php::extension::disenable', $php::sapi::sapis, $defaults)
+    create_resources('php::extension::disenable', $sapis, $defaults)
   } elsif $provider == 'dpkg' {
     package { $package:
       ensure   => $ensure,

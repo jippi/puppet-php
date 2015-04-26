@@ -1,10 +1,9 @@
 define php::extension::disenable (
+  $sapi = $title,
   $exension,
   $ensure = 'present',
   $priority = 20,
 ) {
-# readability. otherwis not needed
-  $sapi = $name
 
   Exec {
   #   fact that php5-common does not guarantee that extension is installed

@@ -63,6 +63,7 @@ define php::extension(
   $provider = undef,
   $pipe     = undef,
   $source   = undef,
+  $sapis    = ['cli', 'fpm', 'apache2'],
   $priority = 20,
 ) {
 
@@ -73,24 +74,13 @@ define php::extension(
       source   => $source,
       pipe     => $pipe;
     }
-    $sapis    = {
-      'cli' => {title => 'cli'},
-      'fpm' => {title => 'fpm'},
-      'apache2' => {title => 'apache2'}
-    }
-    unless defined(Service[$php::fpm::params::service_name]) {
-      $sapis = delete($sapis, 'fpm')
-    }
-    unless defined(Package[$php::apache::params::package]) {
-      $sapis = delete($sapis, 'apache2')
-    }
     $defaults = {
       extension => $package,
       ensure    => $ensure,
       priority  => $priority,
       reqire    => Package[$package],
     }
-    create_resources('php::extension::disenable', $sapis, $defaults)
+    create_resources('php::sapi', $sapis, $defaults)
   } elsif $provider == 'dpkg' {
     package { $package:
       ensure   => $ensure,

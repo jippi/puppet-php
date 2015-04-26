@@ -62,7 +62,9 @@ define php::extension(
   $package,
   $provider = undef,
   $pipe     = undef,
-  $source   = undef
+  $source   = undef,
+  $sapis     = ['cli', 'fpm', 'apache2'],
+  $priority = 20,
 ) {
 
   if $provider == 'pecl' {
@@ -72,6 +74,17 @@ define php::extension(
       source   => $source,
       pipe     => $pipe;
     }
+    $sapi_defaults = {
+      reqire    => Pakage[$package],
+    }
+    create_resources('php::sapi', $sapis, $sapi_defaults)
+    $defaults = {
+      extension => $package,
+      ensure    => $ensure,
+      priority  => $priority,
+      reqire    => Resource[$sapis],
+    }
+    create_resources('php::extension::disenable', $php::sapi::sapis, $defaults)
   } elsif $provider == 'dpkg' {
     package { $package:
       ensure   => $ensure,

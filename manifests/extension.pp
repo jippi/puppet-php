@@ -79,10 +79,10 @@ define php::extension(
       pipe     => $pipe;
     }
     unless defined(Service[$php::fpm::params::service_name]) {
-      delete($sapis, 'fpm')
+      $sapis = delete($sapis, 'fpm')
     }
     unless defined(Package[$php::apache::params::package]) {
-      delete($sapis, 'apache2')
+      $sapis = delete($sapis, 'apache2')
     }
     $defaults = {
       extension => $package,

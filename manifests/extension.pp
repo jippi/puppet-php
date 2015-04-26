@@ -63,7 +63,11 @@ define php::extension(
   $provider = undef,
   $pipe     = undef,
   $source   = undef,
-  $sapis     = ['cli', 'fpm', 'apache2'],
+  $sapis    = {
+    'cli' => {title => 'cli'},
+    'fpm' => {title => 'fpm'},
+    'apache2' => {title => 'apache2'}
+  },
   $priority = 20,
 ) {
 

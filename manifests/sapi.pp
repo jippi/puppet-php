@@ -3,7 +3,6 @@ define php::sapi (
   $ensure,
   $priority,
 ) {
-  $sapis = delete($title, $extension)
   if defined(Service[$php::fpm::params::service_name]) {
     $disenable = $sapi
   } elsif defined(Package[$php::apache::params::package]) {

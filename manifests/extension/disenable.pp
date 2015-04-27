@@ -13,7 +13,7 @@ define php::extension::disenable (
     path    => '/bin:/usr/bin:/usr/local/bin: /sbin:/usr/sbin:/usr/local/sbin',
   }
 
-  validate_re($ensure, '^(present|installed|absent)$')
+  validate_re($ensure, '^(latest|present|installed|absent)$')
 # no need for qualified since path is defined
   $command = $ensure ? {
     'absent' => 'php5dismod',

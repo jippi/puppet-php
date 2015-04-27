@@ -74,7 +74,8 @@ define php::extension(
       source   => $source,
       pipe     => $pipe;
     }
-    php::sapi { $sapis:
+    $uniqe_sapis = suffix($sapis, $extension)
+    php::sapi { $uniqe_sapis:
       extension => $package,
       ensure    => $ensure,
       priority  => $priority,

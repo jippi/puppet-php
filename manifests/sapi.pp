@@ -13,7 +13,7 @@ define php::sapi (
   php::extension::disenable { $title:
     extension   => $extension,
     ensure      => $ensure,
-    pripriority => $priority,
+    priority => $priority,
     unless => empty($disenable)
   }
 }

@@ -80,7 +80,12 @@ define php::extension(
       priority  => $priority,
       reqire    => Package[$package],
     }
-    create_resources('php::sapi', $sapis, $defaults)
+    php::sapi { $sapis:
+      extension => $package,
+      ensure    => $ensure,
+      priority  => $priority,
+      reqire    => Package[$package],
+    }
   } elsif $provider == 'dpkg' {
     package { $package:
       ensure   => $ensure,

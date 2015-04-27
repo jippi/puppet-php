@@ -3,12 +3,21 @@ define php::sapi (
   $ensure,
   $priority,
 ) {
-  if defined(Service[$php::fpm::params::service_name]) and ("fpm${extension}" == $title) {
-    $disenable = $title
-  } elsif defined(Package[$php::apache::params::package]) and ("apache2${extension}" == $title) {
-    $disenable = $title
-  } elsif ("cli${extension}" == $title) {
-    $disenable = $title
+  case $title {
+    "fpm${extension}": {
+      if defined(Service[$php::fpm::params::service_name]) {
+        $disenable = $title
+      }
+    }
+    "apache2${extension}": {
+      if defined(Package[$php::apache::params::package]) {
+        $disenable = $title
+      }
+    }
+    "cli${extension}": {
+      $disenable = $title
+    }
+    default: {}
   }
 
   unless empty($disenable) {

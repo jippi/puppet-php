@@ -10,7 +10,7 @@ define php::sapi (
   } elsif ("cli${extension}" == $title) {
     $disenable = $title
   }
-  php::extension::disenable { $disenable:
+  php::extension::disenable { $title:
     extension   => $extension,
     ensure      => $ensure,
     pripriority => $priority,

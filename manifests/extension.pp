@@ -74,17 +74,11 @@ define php::extension(
       source   => $source,
       pipe     => $pipe;
     }
-    $defaults = {
-      extension => $package,
-      ensure    => $ensure,
-      priority  => $priority,
-      reqire    => Package[$package],
-    }
     php::sapi { $sapis:
       extension => $package,
       ensure    => $ensure,
       priority  => $priority,
-      reqire    => Package[$package],
+      require   => Package[$package],
     }
   } elsif $provider == 'dpkg' {
     package { $package:

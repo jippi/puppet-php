@@ -3,7 +3,6 @@ define php::sapi (
   $extension,
   $ensure,
   $priority,
-  $require
 ) {
   if defined(Service[$php::fpm::params::service_name]) {
     $disenable = $sapi
@@ -16,7 +15,6 @@ define php::sapi (
     extension   => $extension,
     ensure      => $ensure,
     pripriority => $priority,
-    require => $require,
     unless => empty($disenable)
   }
 }

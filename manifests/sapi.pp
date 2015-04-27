@@ -9,13 +9,11 @@ define php::sapi (
     $disenable = $title
   } elsif ("cli${extension}" == $title) {
     $disenable = $title
-  } else {
-    $sapi = delete($title, $extension)
-    fail("Unsuported sapi: ${sapi}")
   }
   php::extension::disenable { $disenable:
     extension   => $extension,
     ensure      => $ensure,
     pripriority => $priority,
+    unless => empty($disenable)
   }
 }

@@ -30,7 +30,7 @@ describe 'php::fpm::config', :type => :define do
     it { should contain_augeas("php-fpm-unique-name-config")
       .with({
         'incl'    => '/etc/php5/fpm/conf.d/unique-name.ini',
-        'changes' => "set .anon/apc.enabled 1"
+        'changes' => [ "set .anon/apc.enabled 1" ],
       })
     }
 

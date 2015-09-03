@@ -95,14 +95,14 @@ define php::extension(
     unless => "${unless} /etc/php5/cli/conf.d/${priority}-${extension}.ini",
   }
 
-  if defined(Service[$php::fpm::params::service_name]) {
+  if $::php::params::service_name and defined(Service[$php::fpm::params::service_name]) {
     exec { "${command} -s fpm ${extension}":
       unless => "${unless} /etc/php5/fpm/conf.d/${priority}-${extension}.ini",
       notify => Service[$php::fpm::params::service_name],
     }
   }
 
-  if defined(Package[$php::apache::params::package]) {
+  if $::php::apache::params::package and defined(Package[$php::apache::params::package]) {
     exec { "${command} -s apache2 ${extension}":
       unless => "${unless} /etc/php5/apache2/conf.d/${priority}-${extension}.ini",
       notify => Service[$php::apache::params::service_name],

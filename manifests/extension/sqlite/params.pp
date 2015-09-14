@@ -22,9 +22,16 @@
 # [*inifile*]
 #   The path to the extension ini file
 #
+# [*pdo_inifile*]
+#   The path to the pdo extension ini file
+#
 # [*settings*]
 #   Hash with 'set' nested hash of key => value
 #   set changes to agues when applied to *inifile*
+#
+# [*pdo_settings*]
+#   Hash with 'set' nested hash of key => value
+#   set changes to agues when applied to *pod_inifile*
 #
 # === Examples
 #
@@ -40,9 +47,11 @@
 #
 class php::extension::sqlite::params {
 
-  $ensure   = $php::params::ensure
-  $package  = 'php5-sqlite'
-  $provider = undef
-  $inifile  = "${php::params::config_root_ini}/sqlite.ini"
-  $settings = [ ]
+  $ensure       = $php::params::ensure
+  $package      = 'php5-sqlite'
+  $provider     = undef
+  $inifile      = "${php::params::config_root_ini}/sqlite.ini"
+  $pdo_inifile  = "${php::params::config_root_ini}/pdo_sqlite.ini"
+  $settings     = [ ]
+  $pdo_settings = [ ]
 }

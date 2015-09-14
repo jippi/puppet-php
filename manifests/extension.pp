@@ -1,4 +1,4 @@
-# == Class: php::extension
+# == Define php::extension
 #
 # Install a PHP extension package
 #
@@ -58,30 +58,54 @@
 # Copyright 2012-2015 Christian "Jippi" Winther, unless otherwise noted.
 #
 define php::extension(
-  $ensure,
-  $package,
+  $ensure   = 'present',
+  $package  = undef,
   $provider = undef,
   $pipe     = undef,
-  $source   = undef
+  $source   = undef,
+  $extension = $title,
+  $priority  = 20,
 ) {
 
-  if $provider == 'pecl' {
+  validate_re($ensure, '^(present|installed|absent)$')
+  $command = $ensure ? {
+    'absent' => '/usr/sbin/php5dismod',
+    default  => '/usr/sbin/php5enmod',
+  }
+  $unless = $ensure ? {
+    'absent' => '/usr/bin/test ! -e',
+    default  => '/usr/bin/test -e',
+  }
+
+  if $package {
     package { $package:
       ensure   => $ensure,
       provider => $provider,
       source   => $source,
       pipe     => $pipe;
     }
-  } elsif $provider == 'dpkg' {
-    package { $package:
-      ensure   => $ensure,
-      provider => $provider,
-      source   => $source;
+  }
+
+  Exec {
+    require => Package['php5-common'],
+    path    => '/bin:/usr/bin:/usr/local/bin',
+  }
+
+  exec { "${command} -s cli ${extension}":
+    unless => "${unless} /etc/php5/cli/conf.d/${priority}-${extension}.ini",
+  }
+
+  if $::php::params::service_name and defined(Service[$php::fpm::params::service_name]) {
+    exec { "${command} -s fpm ${extension}":
+      unless => "${unless} /etc/php5/fpm/conf.d/${priority}-${extension}.ini",
+      notify => Service[$php::fpm::params::service_name],
     }
-  } else {
-    package { $package:
-      ensure   => $ensure,
-      provider => $provider;
+  }
+
+  if $::php::apache::params::package and defined(Package[$php::apache::params::package]) {
+    exec { "${command} -s apache2 ${extension}":
+      unless => "${unless} /etc/php5/apache2/conf.d/${priority}-${extension}.ini",
+      notify => Service[$php::apache::params::service_name],
     }
   }
 

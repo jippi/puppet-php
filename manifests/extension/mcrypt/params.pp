@@ -44,6 +44,8 @@ class php::extension::mcrypt::params {
   $package  = 'php5-mcrypt'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/mcrypt.ini"
-  $settings = [ ]
+  $settings = [
+    'set ".anon/extension" "mcrypt.so"'
+  ]
 
 }

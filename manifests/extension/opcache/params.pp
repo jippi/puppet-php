@@ -44,6 +44,8 @@ class php::extension::opcache::params {
   $package  = undef
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/opcache.ini"
-  $settings = [ ]
+  $settings = [
+    'set ".anon/extension" "opcache.so"'
+  ]
 
 }

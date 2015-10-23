@@ -45,6 +45,8 @@ class php::extension::solr::params {
   $package  = 'solr'
   $provider = 'pecl'
   $inifile  = "${php::params::config_root_ini}/solr.ini"
-  $settings = [ ]
+  $settings = [
+    'set ".anon/extension" "solr.so"'
+  ]
 
 }

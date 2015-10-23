@@ -59,6 +59,8 @@ class php::extension::apc::params {
   }
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/apc.ini"
-  $settings = [ ]
+  $settings = [
+    'set ".anon/extension" "apc.so"'
+  ]
 
 }

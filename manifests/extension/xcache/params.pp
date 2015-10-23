@@ -44,6 +44,8 @@ class php::extension::xcache::params {
   $package  = 'php5-xcache'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/xcache.ini"
-  $settings = []
+  $settings = [
+    'set ".anon/extension" "xcache.so"'
+  ]
 
 }

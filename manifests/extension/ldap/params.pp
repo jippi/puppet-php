@@ -44,5 +44,7 @@ class php::extension::ldap::params {
   $package  = 'php5-ldap'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/ldap.ini"
-  $settings = []
+  $settings = [
+    'set ".anon/extension" "ldap.so"'
+  ]
 }

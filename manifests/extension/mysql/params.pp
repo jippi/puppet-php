@@ -44,6 +44,8 @@ class php::extension::mysql::params {
   $package  = 'php5-mysql'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/mysql.ini"
-  $settings = [ ]
+  $settings = [
+    'set ".anon/extension" "mysql.so"'
+  ]
 
 }

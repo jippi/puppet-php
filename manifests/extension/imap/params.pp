@@ -44,5 +44,7 @@ class php::extension::imap::params {
   $package  = 'php5-imap'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/imap.ini"
-  $settings = []
+  $settings = [
+    'set ".anon/extension" "imap.so"'
+  ]
 }

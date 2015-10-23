@@ -45,6 +45,8 @@ class php::extension::memcache::params {
   $package  = 'php5-memcache'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/memcache.ini"
-  $settings = []
+  $settings = [
+    'set ".anon/extension" "memcache.so"'
+  ]
 
 }

@@ -44,7 +44,7 @@ class php::extension::memcached::params {
   $ensure   = $php::params::ensure
   $package  = 'php5-memcached'
   $provider = undef
-  $inifile  = '/etc/php5/conf.d/20-memcached.ini'
+  $inifile  = "${php::params::config_root_ini}/memcached.ini"
   $settings = []
 
 }

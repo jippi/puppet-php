@@ -44,7 +44,7 @@ class php::extension::memcache::params {
   $ensure   = $php::params::ensure
   $package  = 'php5-memcache'
   $provider = undef
-  $inifile  = '/etc/php5/conf.d/20-memcache.ini'
+  $inifile  = "${php::params::config_root_ini}/memcache.ini"
   $settings = []
 
 }

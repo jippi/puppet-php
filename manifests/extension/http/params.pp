@@ -44,6 +44,8 @@ class php::extension::http::params {
   $package  = 'php5-http'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/http.ini"
-  $settings = [ ]
+  $settings = [
+    'set ".anon/extension" "http.so"'
+  ]
 
 }

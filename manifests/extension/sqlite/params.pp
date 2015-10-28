@@ -44,5 +44,7 @@ class php::extension::sqlite::params {
   $package  = 'php5-sqlite'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/sqlite.ini"
-  $settings = [ ]
+  $settings = [
+    'set ".anon/extension" "sqlite.so"'
+  ]
 }

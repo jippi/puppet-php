@@ -44,6 +44,8 @@ class php::extension::newrelic::params {
   $package  = 'newrelic-php5'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/newrelic.ini"
-  $settings = [ ]
+  $settings = [
+    'set ".anon/extension" "newrelic.so"'
+  ]
 
 }

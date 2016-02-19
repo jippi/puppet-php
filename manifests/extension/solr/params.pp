@@ -1,6 +1,6 @@
-# == Class: php::extension::apc::params
+# == Class: php::extension::tidy::params
 #
-# Defaults file for the APC PHP extension
+# Defaults file for the tidy PHP extension
 #
 # === Parameters
 #
@@ -33,34 +33,20 @@
 # === Authors
 #
 # Christian "Jippi" Winther <jippignu@gmail.com>
+# Goran Miskovic <schkovich@gmail.com>
 #
 # === Copyright
 #
 # Copyright 2012-2015 Christian "Jippi" Winther, unless otherwise noted.
 #
-class php::extension::apc::params {
+class php::extension::solr::params {
 
   $ensure   = $php::params::ensure
-  $package  = $::lsbdistcodename ? {
-    # php-apc is phased out as of Ubuntu 13.10 (saucy)
-    # and Debian jessie in favour of php5-apcu
-    # Debian
-    'squeeze' => 'php-apc',
-    'wheezy' => 'php-apc',
-
-    # Ubuntu
-    'lucid' => 'php-apc',
-    'precise' => 'php-apc',
-    'quantal' => 'php-apc',
-    'raring' => 'php-apc',
-
-    # Default to support future distros cleanly.
-    default => 'php5-apcu',
-  }
-  $provider = undef
-  $inifile  = "${php::params::config_root_ini}/apc.ini"
+  $package  = 'solr'
+  $provider = 'pecl'
+  $inifile  = "${php::params::config_root_ini}/solr.ini"
   $settings = [
-    'set ".anon/extension" "apc.so"'
+    'set ".anon/extension" "solr.so"'
   ]
 
 }

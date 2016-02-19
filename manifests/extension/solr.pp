@@ -1,12 +1,8 @@
-# == Class: php::extension::tidy::params
+# == Class: php::extension::solr
 #
-# Defaults file for the tidy PHP extension
+# Install the solr PHP extension
 #
 # === Parameters
-#
-# No parameters
-#
-# === Variables
 #
 # [*ensure*]
 #   The version of the package to install
@@ -26,9 +22,13 @@
 #   Hash with 'set' nested hash of key => value
 #   set changes to agues when applied to *inifile*
 #
+# === Variables
+#
+# No variables
+#
 # === Examples
 #
-# No examples
+#  include php::extension::solr
 #
 # === Authors
 #
@@ -39,14 +39,23 @@
 #
 # Copyright 2012-2015 Christian "Jippi" Winther, unless otherwise noted.
 #
-class php::extension::tidy::params {
+class php::extension::solr(
+  $ensure   = $php::extension::solr::params::ensure,
+  $package  = $php::extension::solr::params::package,
+  $provider = $php::extension::solr::params::provider,
+  $inifile  = $php::extension::solr::params::inifile,
+  $settings = $php::extension::solr::params::settings
+) inherits php::extension::solr::params {
 
-  $ensure   = $php::params::ensure
-  $package  = 'php5-tidy'
-  $provider = undef
-  $inifile  = "${php::params::config_root_ini}/tidy.ini"
-  $settings = [
-    'set ".anon/extension" "tidy.so"'
-  ]
+  php::extension { 'solr':
+    ensure   => $ensure,
+    package  => $package,
+    provider => $provider
+  }
+  ->
+  php::config { 'php-extension-solr':
+    file   => $inifile,
+    config => $settings
+  }
 
 }

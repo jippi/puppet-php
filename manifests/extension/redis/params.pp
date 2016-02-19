@@ -44,6 +44,8 @@ class php::extension::redis::params {
   $package  = 'php5-redis'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/redis.ini"
-  $settings = [ ]
+  $settings = [
+    'set ".anon/extension" "redis.so"'
+  ]
 
 }

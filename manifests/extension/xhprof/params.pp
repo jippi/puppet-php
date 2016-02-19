@@ -19,9 +19,6 @@
 # [*provider*]
 #   The provider used to install the package
 #
-# [*install_dir*]
-#   The path of the installed xhprof.so binary
-#
 # [*inifile*]
 #   The path to the extension ini file
 #

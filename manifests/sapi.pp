@@ -3,6 +3,8 @@ define php::sapi (
   $ensure,
   $priority,
 ) {
+  include php::apache::params
+  include php::fpm::params
   case $title {
     "fpm${extension}": {
       if defined(Service[$php::fpm::params::service_name]) {

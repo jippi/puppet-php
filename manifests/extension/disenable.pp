@@ -1,8 +1,42 @@
+# == Type: php::extension::disenable
+#
+# Enables a PHP extension installed using PECL
+#
+# === Parameters
+#
+# [*extension*]
+#   The name of extension to enable or disenable
+#
+# [*ensure*]
+#   The ensure of the package to install
+#   Could be "latest", "installed", pinned version or "absent"
+#
+# [*priority*]
+#   Integer indicateing loading order
+#
+# === Variables
+#
+# No variables
+#
+# === Examples
+#
+#  This is a private type and should not be used on its own.
+#
+# === Author
+#
+# Goran Miskovic <schkovich@gmail.com>
+#
+# === Copyright
+#
+# Copyright 2012-2016 Christian "Jippi" Winther, unless otherwise noted.
+#
 define php::extension::disenable (
   $extension,
   $ensure = 'present',
   $priority = 20,
 ) {
+
+  assert_private("This is a privete type and should not be used on its own.")
 
   $sapi = delete($title, $extension)
 

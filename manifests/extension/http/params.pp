@@ -41,7 +41,7 @@
 class php::extension::http::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php5-http'
+  $package  = 'php7.0-http'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/http.ini"
   $settings = [ ]

@@ -41,7 +41,7 @@
 class php::extension::mysqlnd::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php5-mysqlnd'
+  $package  = 'php7.0-mysqlnd'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/mysqlnd.ini"
   $settings = [ ]

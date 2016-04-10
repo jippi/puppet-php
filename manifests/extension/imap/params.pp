@@ -41,8 +41,8 @@
 class php::extension::imap::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php5-imap'
+  $package  = 'php7.0-imap'
   $provider = undef
-  $inifile  = '/etc/php5/conf.d/20-imap.ini'
+  $inifile  = '/etc/php/conf.d/imap.ini'
   $settings = []
 }

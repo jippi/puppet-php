@@ -41,7 +41,7 @@
 class php::extension::mysql::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php5-mysql'
+  $package  = 'php7.0-mysql'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/mysql.ini"
   $settings = [ ]

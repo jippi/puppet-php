@@ -29,7 +29,7 @@ class php::params {
 
   $ensure = 'installed'
 
-  $config_root = '/etc/php5'
+  $config_root = '/etc/php'
 
   if $::php_version == '' or versioncmp($::php_version, '5.4') >= 0 {
     $config_root_ini = "${::php::params::config_root}/mods-available"

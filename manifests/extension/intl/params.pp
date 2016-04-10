@@ -41,7 +41,7 @@
 class php::extension::intl::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php5-intl'
+  $package  = 'php7.0-intl'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/intl.ini"
   $settings = [ ]

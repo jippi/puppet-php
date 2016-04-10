@@ -44,7 +44,7 @@
 class php::extension::xdebug::params {
 
   $ensure      = $php::params::ensure
-  $package     = 'php5-xdebug'
+  $package     = 'php7.0-xdebug'
   $provider    = undef
   $install_dir = "/usr/lib/php5/${::php_extension_version}"
   $inifile     = "${php::params::config_root_ini}/xdebug.ini"

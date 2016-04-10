@@ -41,7 +41,7 @@
 class php::extension::apcu::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php5-apcu'
+  $package  = 'php7.0-apcu'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/apcu.ini"
   $settings = []

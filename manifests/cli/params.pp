@@ -41,9 +41,9 @@
 class php::cli::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php5-cli'
+  $package  = 'php7.0-cli'
   $provider = undef
-  $inifile  = '/etc/php5/cli/php.ini'
+  $inifile  = '/etc/php/7.0/cli/php.ini'
   $settings = [ ]
 
 }

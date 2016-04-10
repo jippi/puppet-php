@@ -41,11 +41,9 @@
 class php::extension::yaml::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'yaml'
-  $provider = 'pecl'
+  $package  = 'php7.0-yaml'
+  $provider = undef
   $inifile  = "${php::params::config_root_ini}/yaml.ini"
-  $settings = [
-    'set ".anon/extension" "yaml.so"'
-  ]
+  $settings = []
 
 }

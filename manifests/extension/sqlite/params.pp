@@ -41,7 +41,7 @@
 class php::extension::sqlite::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php5-sqlite'
+  $package  = 'php7.0-sqlite'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/sqlite.ini"
   $settings = [ ]

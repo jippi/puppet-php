@@ -55,7 +55,7 @@ class php::extension::apc::params {
     'raring' => 'php-apc',
 
     # Default to support future distros cleanly.
-    default => 'php5-apcu',
+    default => 'php7.0-apcu',
   }
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/apc.ini"

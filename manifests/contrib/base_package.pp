@@ -33,8 +33,8 @@ define php::contrib::base_package(
   $provider = undef
 ) {
 
-  if !defined(Package['php5-common']) {
-    package { 'php5-common':
+  if !defined(Package['php7.0-common']) {
+    package { 'php7.0-common':
       ensure   => $ensure,
       provider => $provider
     }

@@ -26,7 +26,7 @@ Installs the ``mod_php`` PHP SAPI for apache.
 
 * ``$package`` defaults to ``libapache2-mod-php5``.
 
-* ``$inifile`` defaults to ``/etc/php5/apache2/php.ini``.
+* ``$inifile`` defaults to ``/etc/php/7.0/apache2/php.ini``.
 
 * ``$service_name`` defaults to ``apache2``.
 
@@ -40,11 +40,11 @@ php::fpm
 
 Installs the ``FPM`` PHP SAPI.
 
-* ``$package`` defaults to ``php5-fpm``.
+* ``$package`` defaults to ``php7.0-fpm``.
 
-* ``$inifile`` defaults to ``/etc/php5/fpm/php.ini``.
+* ``$inifile`` defaults to ``/etc/php/7.0/fpm/php.ini``.
 
-* ``$service_name`` defaults to ``php5-fpm``.
+* ``$service_name`` defaults to ``php7.0-fpm``.
 
 * ``$service_ensure`` defaults to ``running``.
 
@@ -60,5 +60,5 @@ Installs the ``CLI`` PHP SAPI.
 
 * ``$package`` defaults to ``php5-cli``.
 
-* ``$inifile`` defaults to ``/etc/php5/cli/php.ini``.
+* ``$inifile`` defaults to ``/etc/php/7.0/cli/php.ini``.
 

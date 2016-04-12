@@ -10,7 +10,7 @@ describe 'php::extension::xdebug' do
 
     it { should contain_augeas("php-php-extension-xdebug-config")
       .with({
-        :incl      => '/etc/php5/mods-available/xdebug.ini',
+        :incl      => '/etc/php/7.0/mods-available/xdebug.ini',
       })
     }
   end
@@ -20,7 +20,7 @@ describe 'php::extension::xdebug' do
 
     it { should contain_augeas("php-php-extension-xdebug-config")
       .with({
-        :incl      => '/etc/php5/conf.d/xdebug.ini',
+        :incl      => '/etc/php/7.0/conf.d/xdebug.ini',
       })
     }
   end
@@ -30,7 +30,7 @@ describe 'php::extension::xdebug' do
 
     it { should contain_augeas("php-php-extension-xdebug-config")
       .with({
-        :incl      => '/etc/php5/mods-available/xdebug.ini',
+        :incl      => '/etc/php/7.0/mods-available/xdebug.ini',
       })
     }
   end
@@ -40,7 +40,7 @@ describe 'php::extension::xdebug' do
 
     it { should contain_augeas("php-php-extension-xdebug-config")
       .with({
-        :incl      => '/etc/php5/mods-available/xdebug.ini',
+        :incl      => '/etc/php/7.0/mods-available/xdebug.ini',
       })
     }
   end
@@ -50,19 +50,19 @@ describe 'php::extension::xdebug' do
 
     it { should contain_augeas("php-php-extension-xdebug-config")
       .with({
-        :incl      => '/etc/php5/mods-available/xdebug.ini',
+        :incl      => '/etc/php/7.0/mods-available/xdebug.ini',
       })
     }
   end
-  
+
   context 'with php 5.5.11-1~dotdeb.1' do
     let(:facts) { { :php_version => '5.5'} }
 
     it { should contain_augeas("php-php-extension-xdebug-config")
       .with({
-        :incl      => '/etc/php5/mods-available/xdebug.ini',
+        :incl      => '/etc/php/7.0/mods-available/xdebug.ini',
       })
     }
   end
-  
+
 end

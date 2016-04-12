@@ -8,28 +8,28 @@ describe 'php::fpm::config', :type => :define do
   context 'valid config' do
     let(:title) { 'unique-name' }
     let(:params) {{
-      :file   => '/etc/php5/fpm/conf.d/unique-name.ini',
+      :file   => '/etc/php/7.0/fpm/conf.d/unique-name.ini',
       :config  => ['set .anon/apc.enabled 1'],
     }}
 
     it { should contain_php__fpm__config('unique-name')
       .with({
-        'file'    => '/etc/php5/fpm/conf.d/unique-name.ini',
+        'file'    => '/etc/php/7.0/fpm/conf.d/unique-name.ini',
         'config'  => ['set .anon/apc.enabled 1']
       })
     }
 
     it { should contain_php__config('unique-name')
       .with({
-        'file'    => '/etc/php5/fpm/conf.d/unique-name.ini',
+        'file'    => '/etc/php/7.0/fpm/conf.d/unique-name.ini',
         'config'  => ['set .anon/apc.enabled 1'],
-        'notify'  => 'Service[php5-fpm]',
+        'notify'  => 'Service[php7.0-fpm]',
       })
     }
 
     it { should contain_augeas("php-fpm-unique-name-config")
       .with({
-        'incl'    => '/etc/php5/fpm/conf.d/unique-name.ini',
+        'incl'    => '/etc/php/7.0/fpm/conf.d/unique-name.ini',
         'changes' => "set .anon/apc.enabled 1"
       })
     }
@@ -39,7 +39,7 @@ describe 'php::fpm::config', :type => :define do
   context 'invalid config (string)' do
     let(:title) { 'unique-name' }
     let(:params) {{
-      :file => '/etc/php5/fpm/conf.d/unique-name.ini',
+      :file => '/etc/php/7.0/fpm/conf.d/unique-name.ini',
       :config => 'hello world'
     }}
 
@@ -51,13 +51,13 @@ describe 'php::fpm::config', :type => :define do
 
     it { should contain_php__config('upload_max_filesize=20M').with({
       'ensure'  => 'present',
-      'file'    => '/etc/php5/fpm/php.ini',
+      'file'    => '/etc/php/7.0/fpm/php.ini',
       'section' => 'PHP',
     } )}
 
-    it { should contain_ini_setting('upload_max_filesize=20M in /etc/php5/fpm/php.ini').with({
+    it { should contain_ini_setting('upload_max_filesize=20M in /etc/php/7.0/fpm/php.ini').with({
       'ensure'  => 'present',
-      'path'    => '/etc/php5/fpm/php.ini',
+      'path'    => '/etc/php/7.0/fpm/php.ini',
       'section' => 'PHP',
       'setting' => 'upload_max_filesize',
       'value'   => '20M',

@@ -84,10 +84,10 @@ FPM
     create_resources('php::fpm::pool',  hiera_hash('php_fpm_pool', {}))
     create_resources('php::fpm::config',  hiera_hash('php_fpm_config', {}))
 
-    Php::Extension <| |> ~> Service['php5-fpm']
+    Php::Extension <| |> ~> Service['php7.0-fpm']
 
-    exec { "restart-php5-fpm":
-      command  => "service php5-fpm restart",
+    exec { "restart-php7.0-fpm":
+      command  => "service php7.0-fpm restart",
       schedule => hourly
     }
 

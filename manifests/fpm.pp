@@ -10,14 +10,14 @@
 #
 # [*package*]
 #   The package name for fpm package
-#   For debian it's php5-fpm
+#   For debian it's php7.0-fpm
 #
 # [*provider*]
-#   The provider used to install php5-fpm
+#   The provider used to install php7.0-fpm
 #   Could be "pecl", "apt" or any other OS package provider
 #
 # [*inifile*]
-#   The path to the ini php5-fpm ini file
+#   The path to the ini php7.0-fpm ini file
 #
 # [*settings*]
 #   Hash with 'set' nested hash of key => value

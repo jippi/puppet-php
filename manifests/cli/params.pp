@@ -40,6 +40,8 @@
 #
 class php::cli::params {
 
+  include php::params
+  
   $ensure   = $php::params::ensure
   $package  = 'php5-cli'
   $provider = undef

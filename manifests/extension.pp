@@ -62,7 +62,9 @@ define php::extension(
   $package,
   $provider = undef,
   $pipe     = undef,
-  $source   = undef
+  $source   = undef,
+  $sapis    = ['cli', 'fpm', 'apache2'],
+  $priority = 20,
 ) {
 
   if $provider == 'pecl' {
@@ -71,6 +73,13 @@ define php::extension(
       provider => $provider,
       source   => $source,
       pipe     => $pipe;
+    }
+    $uniqe_sapis = suffix($sapis, $package)
+    php::sapi { $uniqe_sapis:
+      extension => $package,
+      ensure    => $ensure,
+      priority  => $priority,
+      require   => Package[$package],
     }
   } elsif $provider == 'dpkg' {
     package { $package:

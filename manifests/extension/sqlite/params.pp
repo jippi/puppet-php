@@ -41,8 +41,27 @@
 class php::extension::sqlite::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php7.0-sqlite'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/sqlite.ini"
   $settings = [ ]
+
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9')) {
+            $package        = 'php7.0-sqlite'
+          } else {
+            $package        = 'php5-sqlite'
+          }
+        }
+        default: {
+          $package      = 'php7.0-sqlite'
+        }
+      }
+    }
+    default: {
+      $package      = 'php7.0-sqlite'
+    }
+  }
 }

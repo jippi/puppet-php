@@ -41,8 +41,27 @@
 class php::extension::imap::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php7.0-imap'
   $provider = undef
-  $inifile  = '/etc/php/conf.d/imap.ini'
+  $inifile  = "${php::params::config_root_ini}/imap.ini"
   $settings = []
+
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9')) {
+            $package        = 'php7.0-imap'
+          } else {
+            $package        = 'php5-imap'
+          }
+        }
+        default: {
+          $package      = 'php7.0-imap'
+        }
+      }
+    }
+    default: {
+      $package      = 'php7.0-imap'
+    }
+  }
 }

@@ -46,4 +46,23 @@ class php::extension::http::params {
   $inifile  = "${php::params::config_root_ini}/http.ini"
   $settings = [ ]
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9')) {
+            $package        = 'php7.0-http'
+          } else {
+            warning('php::extension::http package does not exists on php5')
+          }
+        }
+        default: {
+          $package      = 'php7.0-http'
+        }
+      }
+    }
+    default: {
+      $package      = 'php7.0-http'
+    }
+  }
 }

@@ -41,9 +41,27 @@
 class php::extension::redis::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php7.0-redis'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/redis.ini"
   $settings = [ ]
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9')) {
+            $package        = 'php7.0-redis'
+          } else {
+            $package        = 'php5-redis'
+          }
+        }
+        default: {
+          $package      = 'php7.0-redis'
+        }
+      }
+    }
+    default: {
+      $package      = 'php7.0-redis'
+    }
+  }
 }

@@ -41,9 +41,30 @@
 class php::cli::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php7.0-cli'
   $provider = undef
-  $inifile  = '/etc/php/7.0/cli/php.ini'
   $settings = [ ]
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9')) {
+            $inifile        = '/etc/php/7.0/cli/php.ini'
+            $package        = 'php7.0-cli'
+          } else {
+            $inifile        = '/etc/php5/cli/php.ini'
+            $package        = 'php5-cli'
+          }
+        }
+        default: {
+          $inifile      = '/etc/php/7.0/cli/php.ini'
+          $package      = 'php7.0-cli'
+        }
+      }
+    }
+    default: {
+      $inifile      = '/etc/php/7.0/cli/php.ini'
+      $package      = 'php7.0-cli'
+    }
+  }
 }

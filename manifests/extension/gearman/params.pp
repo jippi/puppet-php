@@ -41,9 +41,27 @@
 class php::extension::gearman::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php7.0-gearman'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/gearman.ini"
   $settings = [ ]
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9')) {
+            $package        = 'php7.0-gearman'
+          } else {
+            $package        = 'php5-gearman'
+          }
+        }
+        default: {
+          $package      = 'php7.0-gearman'
+        }
+      }
+    }
+    default: {
+      $package      = 'php7.0-gearman'
+    }
+  }
 }

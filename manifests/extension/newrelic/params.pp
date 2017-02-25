@@ -41,9 +41,27 @@
 class php::extension::newrelic::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'newrelic-php5'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/newrelic.ini"
   $settings = [ ]
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9')) {
+            $package        = 'newrelic-php7'
+          } else {
+            $package        = 'newrelic-php5'
+          }
+        }
+        default: {
+          $package      = 'newrelic-php5'
+        }
+      }
+    }
+    default: {
+      $package      = 'newrelic-php5'
+    }
+  }
 }

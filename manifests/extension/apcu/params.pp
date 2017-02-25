@@ -41,8 +41,27 @@
 class php::extension::apcu::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php7.0-apcu'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/apcu.ini"
   $settings = []
+
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9')) {
+            $package        = 'php7.0-apcu'
+          } else {
+            $package        = 'php5-apcu'
+          }
+        }
+        default: {
+          $package      = 'php7.0-apcu'
+        }
+      }
+    }
+    default: {
+      $package      = 'php7.0-apcu'
+    }
+  }
 }

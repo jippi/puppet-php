@@ -29,8 +29,6 @@ class php::params {
 
   $ensure = 'installed'
 
-  $config_root = '/etc/php'
-
   if $::php_version == '' or versioncmp($::php_version, '5.4') >= 0 {
     $config_root_ini = "${::php::params::config_root}/mods-available"
   } else {
@@ -39,4 +37,23 @@ class php::params {
 
   $augeas_contrib_dir = '/usr/share/augeas/lenses/contrib'
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9')) {
+            $config_root    = '/etc/php/7.0'
+          } else {
+            $config_root    = '/etc/php5'
+          }
+        }
+        default: {
+          $config_root  = '/etc/php/7.0'
+        }
+      }
+    }
+    default: {  
+      $config_root  = '/etc/php/7.0'
+    }
+  }
 }

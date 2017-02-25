@@ -41,24 +41,27 @@
 class php::extension::apc::params {
 
   $ensure   = $php::params::ensure
-  $package  = $::lsbdistcodename ? {
-    # php-apc is phased out as of Ubuntu 13.10 (saucy)
-    # and Debian jessie in favour of php5-apcu
-    # Debian
-    'squeeze' => 'php-apc',
-    'wheezy' => 'php-apc',
-
-    # Ubuntu
-    'lucid' => 'php-apc',
-    'precise' => 'php-apc',
-    'quantal' => 'php-apc',
-    'raring' => 'php-apc',
-
-    # Default to support future distros cleanly.
-    default => 'php7.0-apcu',
-  }
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/apc.ini"
   $settings = [ ]
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9')) {
+            $package        = 'php-apcu'
+          } else {
+            $package        = 'php-apc'
+          }
+        }
+        default: {
+          $package      = 'php-apc'
+        }
+      }
+    }
+    default: {
+      $package      = 'php-apc'
+    }
+  }
 }

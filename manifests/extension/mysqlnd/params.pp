@@ -41,9 +41,27 @@
 class php::extension::mysqlnd::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php7.0-mysqlnd'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/mysqlnd.ini"
   $settings = [ ]
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9')) {
+            $package        = 'php7.0-mysqlnd'
+          } else {
+            $package        = 'php5-mysqlnd'
+          }
+        }
+        default: {
+          $package      = 'php7.0-mysqlnd'
+        }
+      }
+    }
+    default: {
+      $package      = 'php7.0-mysqlnd'
+    }
+  }
 }

@@ -41,9 +41,27 @@
 class php::extension::imagick::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php7.0-imagick'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/imagick.ini"
   $settings = [ ]
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9')) {
+            $package        = 'php7.0-imagick'
+          } else {
+            $package        = 'php5-imagick'
+          }
+        }
+        default: {
+          $package      = 'php7.0-imagick'
+        }
+      }
+    }
+    default: {
+      $package      = 'php7.0-imagick'
+    }
+  }
 }

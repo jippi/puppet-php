@@ -41,9 +41,27 @@
 class php::extension::ssh2::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php7.0-ssh2'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/ssh2.ini"
   $settings = [ ]
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9')) {
+            $package        = 'php7.0-ssh2'
+          } else {
+            $package        = 'php5-ssh2'
+          }
+        }
+        default: {
+          $package      = 'php7.0-ssh2'
+        }
+      }
+    }
+    default: {
+      $package      = 'php7.0-ssh2'
+    }
+  }
 }

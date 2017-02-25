@@ -42,9 +42,27 @@
 class php::extension::tidy::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php7.0-tidy'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/tidy.ini"
   $settings = [ ]
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9')) {
+            $package        = 'php7.0-tidy'
+          } else {
+            $package        = 'php5-tidy'
+          }
+        }
+        default: {
+          $package      = 'php7.0-tidy'
+        }
+      }
+    }
+    default: {
+      $package      = 'php7.0-tidy'
+    }
+  }
 }

@@ -41,11 +41,37 @@
 class php::apache::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'libapache2-mod-php5'
   $provider = undef
-  $inifile  = '/etc/php/7.0/apache2/php.ini'
   $settings = [ ]
 
-  $service_name = 'apache2'
-
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9')) {
+            $service_name   = 'apache2'
+            $package        = 'libapache2-mod-php7.0'
+            $inifile        = '/etc/php/7.0/apache2/php.ini'
+          } else {
+            $service_name   = 'apache2'
+            $package        = 'libapache2-mod-php5'
+            $inifile        = '/etc/php5/apache2/php.ini'
+          }
+        }
+        default: {
+          $server_name  = 'apache2'
+          $package      = 'libapache2-mod-php7.0'
+          $inifile      = '/etc/php/7.0/apache2/php.ini'
+        }
+      }
+    }
+    #
+    # @todo RedHat uses 'httpd' as service name
+    #
+    default: {
+      $service_name     = 'apache2'
+      $package          = 'libapache2-mod-php7.0'
+      $inifile          = '/etc/php/7.0/apache2/php.ini'
+    }
+  }
 }

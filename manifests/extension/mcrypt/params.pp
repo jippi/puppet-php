@@ -41,9 +41,27 @@
 class php::extension::mcrypt::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php7.0-mcrypt'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/mcrypt.ini"
   $settings = [ ]
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9')) {
+            $package        = 'php7.0-mcrypt'
+          } else {
+            $package        = 'php5-mcrypt'
+          }
+        }
+        default: {
+          $package      = 'php7.0-mcrypt'
+        }
+      }
+    }
+    default: {
+      $package      = 'php7.0-mcrypt'
+    }
+  }
 }

@@ -46,7 +46,25 @@
 class php::pear::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php-pear'
   $provider = undef
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9')) {
+            $package        = 'php-pear'
+          } else {
+            $package        = 'php-pear'
+          }
+        }
+        default: {
+          $package      = 'php-pear'
+        }
+      }
+    }
+    default: {
+      $package      = 'php-pear'
+    }
+  }
 }

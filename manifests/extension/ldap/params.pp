@@ -41,8 +41,27 @@
 class php::extension::ldap::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php5-ldap'
   $provider = undef
   $inifile  = '/etc/php/7.0/conf.d/20-ldap.ini'
   $settings = []
+
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9')) {
+            $package        = 'php7.0-ldap'
+          } else {
+            $package        = 'php5-ldap'
+          }
+        }
+        default: {
+          $package      = 'php7.0-ldap'
+        }
+      }
+    }
+    default: {
+      $package      = 'php7.0-ldap'
+    }
+  }
 }

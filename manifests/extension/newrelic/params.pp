@@ -49,7 +49,7 @@ class php::extension::newrelic::params {
     'Debian': {
       case $::operatingsystem {
         'Debian': {
-          if (versioncmp($::operatingsystemrelease, '9')) {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
             $package        = 'newrelic-php7'
           } else {
             $package        = 'newrelic-php5'

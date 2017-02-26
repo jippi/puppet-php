@@ -50,7 +50,7 @@ class php::extension::http::params {
     'Debian': {
       case $::operatingsystem {
         'Debian': {
-          if (versioncmp($::operatingsystemrelease, '9')) {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
             $package        = 'php7.0-http'
           } else {
             warning('php::extension::http package does not exists on php5')

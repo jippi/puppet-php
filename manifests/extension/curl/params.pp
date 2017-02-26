@@ -49,7 +49,7 @@ class php::extension::curl::params {
     'Debian': {
       case $::operatingsystem {
         'Debian': {
-          if (versioncmp($::operatingsystemrelease, '9')) {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
             $package        = 'php7.0-curl'
           } else {
             $package        = 'php5-curl'

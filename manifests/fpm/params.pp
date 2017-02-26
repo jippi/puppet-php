@@ -50,6 +50,8 @@ class php::fpm::params inherits php::params {
   $service_provider   = undef
 
   # default params for php-fpm.conf, ported from php::fpm::daemon
+  $fpm_config                   = "${::php::params::config_root}/fpm/php-fpm.conf"
+  $inifile                      = "${::php::params::config_root}/fpm/php.ini"
   $syslog_facility              = undef
   $syslog_ident                 = undef
   $log_level                    = 'notice'
@@ -67,16 +69,14 @@ class php::fpm::params inherits php::params {
     'Debian': {
       case $::operatingsystem {
         'Debian': {
-          if (versioncmp($::operatingsystemrelease, '9')) {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
             $pid            = '/var/run/php7.0-fpm.pid'
             $error_log      = '/var/log/php7.0-fpm.log'
-            $inifile        = '/etc/php/7.0/fpm/php.ini'
             $package        = 'php7.0-fpm'
             $service_name   = 'php7.0-fpm'
           } else {
             $pid            = '/var/run/php5-fpm.pid'
             $error_log      = '/var/log/php5-fpm.log'
-            $inifile        = '/etc/php5/fpm/php.ini'
             $package        = 'php5.0-fpm'
             $service_name   = 'php5.0-fpm'
           }
@@ -84,7 +84,6 @@ class php::fpm::params inherits php::params {
         default: {
           $pid          = '/var/run/php7.0-fpm.pid'
           $error_log    = '/var/log/php7.0-fpm.log'
-          $inifile      = '/etc/php/7.0/fpm/php.ini'
           $package      = 'php7.0-fpm'
           $service_name = 'php7.0-fpm'
         }

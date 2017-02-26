@@ -49,7 +49,7 @@ class php::extension::xcache::params {
     'Debian': {
       case $::operatingsystem {
         'Debian': {
-          if (versioncmp($::operatingsystemrelease, '9')) {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
             $package        = 'php7.0-xcache'
           } else {
             $package        = 'php5-xcache'

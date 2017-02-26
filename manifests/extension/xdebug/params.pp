@@ -54,7 +54,7 @@ class php::extension::xdebug::params {
     'Debian': {
       case $::operatingsystem {
         'Debian': {
-          if (versioncmp($::operatingsystemrelease, '9')) {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
             $install_dir    = "/usr/lib/php/${::php_extension_version}"
             $package        = 'php7.0-xdebug'
           } else {

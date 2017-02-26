@@ -48,7 +48,7 @@ class php::cli::params {
     'Debian': {
       case $::operatingsystem {
         'Debian': {
-          if (versioncmp($::operatingsystemrelease, '9')) {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
             $inifile        = '/etc/php/7.0/cli/php.ini'
             $package        = 'php7.0-cli'
           } else {

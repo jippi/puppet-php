@@ -49,7 +49,7 @@ class php::extension::ssh2::params {
     'Debian': {
       case $::operatingsystem {
         'Debian': {
-          if (versioncmp($::operatingsystemrelease, '9')) {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
             $package        = 'php7.0-ssh2'
           } else {
             $package        = 'php5-ssh2'

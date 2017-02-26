@@ -41,7 +41,7 @@ class php::params {
     'Debian': {
       case $::operatingsystem {
         'Debian': {
-          if (versioncmp($::operatingsystemrelease, '9')) {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
             $config_root    = '/etc/php/7.0'
           } else {
             $config_root    = '/etc/php5'

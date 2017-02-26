@@ -52,7 +52,7 @@ class php::pear::params {
     'Debian': {
       case $::operatingsystem {
         'Debian': {
-          if (versioncmp($::operatingsystemrelease, '9')) {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
             $package        = 'php-pear'
           } else {
             $package        = 'php-pear'

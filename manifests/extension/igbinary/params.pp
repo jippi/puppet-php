@@ -50,18 +50,18 @@ class php::extension::igbinary::params {
       case $::operatingsystem {
         'Debian': {
           if (versioncmp($::operatingsystemrelease, '9') >= 0) {
-            $package        = 'php7.0-igbinary'
+            $package        = 'php-igbinary'
           } else {
             $package        = 'php5-igbinary'
           }
         }
         default: {
-          $package      = 'php7.0-igbinary'
+          $package      = 'php-igbinary'
         }
       }
     }
     default: {
-      $package      = 'php7.0-igbinary'
+      $package      = 'php-igbinary'
     }
   }
 }

@@ -46,9 +46,6 @@ class php::extension::xdebug::params {
   $ensure      = $php::params::ensure
   $provider    = undef
   $inifile     = "${php::params::config_root_ini}/xdebug.ini"
-  $settings    = [
-    "set .anon/zend_extension '${install_dir}/xdebug.so'"
-  ]
 
   case $::osfamily {
     'Debian': {
@@ -56,7 +53,7 @@ class php::extension::xdebug::params {
         'Debian': {
           if (versioncmp($::operatingsystemrelease, '9') >= 0) {
             $install_dir    = "/usr/lib/php/${::php_extension_version}"
-            $package        = 'php7.0-xdebug'
+            $package        = 'php-xdebug'
           } else {
             $install_dir    = "/usr/lib/php5/${::php_extension_version}"
             $package        = 'php5-xdebug'
@@ -64,13 +61,17 @@ class php::extension::xdebug::params {
         }
         default: {
           $install_dir  = "/usr/lib/php/${::php_extension_version}"
-          $package      = 'php7.0-xdebug'
+          $package      = 'php-xdebug'
         }
       }
     }
     default: {
       $install_dir  = "/usr/lib/php/${::php_extension_version}"
-      $package      = 'php7.0-xdebug'
+      $package      = 'php-xdebug'
     }
   }
+
+  $settings    = [
+    "set .anon/zend_extension '${install_dir}/xdebug.so'"
+  ]
 }

@@ -50,18 +50,18 @@ class php::extension::apcu::params {
       case $::operatingsystem {
         'Debian': {
           if (versioncmp($::operatingsystemrelease, '9') >= 0) {
-            $package        = 'php7.0-apcu'
+            $package        = 'php-apcu'
           } else {
             $package        = 'php5-apcu'
           }
         }
         default: {
-          $package      = 'php7.0-apcu'
+          $package      = 'php-apcu'
         }
       }
     }
     default: {
-      $package      = 'php7.0-apcu'
+      $package      = 'php-apcu'
     }
   }
 }

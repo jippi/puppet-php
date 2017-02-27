@@ -50,18 +50,18 @@ class php::extension::gearman::params {
       case $::operatingsystem {
         'Debian': {
           if (versioncmp($::operatingsystemrelease, '9') >= 0) {
-            $package        = 'php7.0-gearman'
+            $package        = 'php-gearman'
           } else {
             $package        = 'php5-gearman'
           }
         }
         default: {
-          $package      = 'php7.0-gearman'
+          $package      = 'php-gearman'
         }
       }
     }
     default: {
-      $package      = 'php7.0-gearman'
+      $package      = 'php-gearman'
     }
   }
 }

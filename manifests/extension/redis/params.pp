@@ -50,18 +50,18 @@ class php::extension::redis::params {
       case $::operatingsystem {
         'Debian': {
           if (versioncmp($::operatingsystemrelease, '9') >= 0) {
-            $package        = 'php7.0-redis'
+            $package        = 'php-redis'
           } else {
             $package        = 'php5-redis'
           }
         }
         default: {
-          $package      = 'php7.0-redis'
+          $package      = 'php-redis'
         }
       }
     }
     default: {
-      $package      = 'php7.0-redis'
+      $package      = 'php-redis'
     }
   }
 }

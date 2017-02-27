@@ -50,18 +50,18 @@ class php::extension::yaml::params {
       case $::operatingsystem {
         'Debian': {
           if (versioncmp($::operatingsystemrelease, '9') >= 0) {
-            $package        = 'php7.0-yaml'
+            $package        = 'php-yaml'
           } else {
             $package        = 'php5-yaml'
           }
         }
         default: {
-          $package      = 'php7.0-yaml'
+          $package      = 'php-yaml'
         }
       }
     }
     default: {
-      $package      = 'php7.0-yaml'
+      $package      = 'php-yaml'
     }
   }
 }

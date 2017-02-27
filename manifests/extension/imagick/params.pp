@@ -50,18 +50,18 @@ class php::extension::imagick::params {
       case $::operatingsystem {
         'Debian': {
           if (versioncmp($::operatingsystemrelease, '9') >= 0) {
-            $package        = 'php7.0-imagick'
+            $package        = 'php-imagick'
           } else {
             $package        = 'php5-imagick'
           }
         }
         default: {
-          $package      = 'php7.0-imagick'
+          $package      = 'php-imagick'
         }
       }
     }
     default: {
-      $package      = 'php7.0-imagick'
+      $package      = 'php-imagick'
     }
   }
 }

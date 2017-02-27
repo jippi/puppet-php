@@ -50,18 +50,18 @@ class php::extension::mysqlnd::params {
       case $::operatingsystem {
         'Debian': {
           if (versioncmp($::operatingsystemrelease, '9') >= 0) {
-            $package        = 'php7.0-mysqlnd'
+            $package        = 'php7.0-mysql'
           } else {
             $package        = 'php5-mysqlnd'
           }
         }
         default: {
-          $package      = 'php7.0-mysqlnd'
+          $package      = 'php7.0-mysql'
         }
       }
     }
     default: {
-      $package      = 'php7.0-mysqlnd'
+      $package      = 'php7.0-mysql'
     }
   }
 }

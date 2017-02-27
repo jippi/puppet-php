@@ -51,18 +51,18 @@ class php::extension::memcached::params {
       case $::operatingsystem {
         'Debian': {
           if (versioncmp($::operatingsystemrelease, '9') >= 0) {
-            $package        = 'php7.0-memcached'
+            $package        = 'php-memcached'
           } else {
             $package        = 'php5-memcached'
           }
         }
         default: {
-          $package      = 'php7.0-memcached'
+          $package      = 'php-memcached'
         }
       }
     }
     default: {
-      $package      = 'php7.0-memcached'
+      $package      = 'php-memcached'
     }
   }
 }

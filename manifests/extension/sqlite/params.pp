@@ -50,18 +50,18 @@ class php::extension::sqlite::params {
       case $::operatingsystem {
         'Debian': {
           if (versioncmp($::operatingsystemrelease, '9') >= 0) {
-            $package        = 'php7.0-sqlite'
+            $package        = 'php7.0-sqlite3'
           } else {
             $package        = 'php5-sqlite'
           }
         }
         default: {
-          $package      = 'php7.0-sqlite'
+          $package      = 'php7.0-sqlite3'
         }
       }
     }
     default: {
-      $package      = 'php7.0-sqlite'
+      $package      = 'php7.0-sqlite3'
     }
   }
 }

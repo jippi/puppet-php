@@ -3,10 +3,10 @@ define php::config::augeas (
   $file,
   $config,
 ) {
-  include ::php::augeas
-  include ::php::params
+  include php::augeas
+  include php::params
 
-  augeas { $name:
+  augeas { "php-${name}-config":
     incl      => $file,
     changes   => $config,
     load_path => $php::params::augeas_contrib_dir,

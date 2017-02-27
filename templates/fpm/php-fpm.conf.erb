@@ -142,4 +142,5 @@ events.mechanism = <%= @events_mechanism %>
 ; Relative path can also be used. They will be prefixed by:
 ;  - the global prefix if it's been set (-p argument)
 ;  - /usr otherwise
-include=/etc/php/7.0/fpm/pool.d/*.conf
+include=<%= @config_root -%>/fpm/pool.d/*.conf
+

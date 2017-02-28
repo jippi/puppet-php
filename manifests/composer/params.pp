@@ -34,4 +34,24 @@ class php::composer::params {
   $max_age     = 30
   $source      = 'https://getcomposer.org/composer.phar'
   $destination = '/usr/local/bin/composer'
+
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
+            $cli_package    = 'php7.0-cli'
+          } else {
+            $cli_package    = 'php5-cli'
+          }
+        }
+        default: {
+          $cli_package  = 'php7.0-cli'
+        }
+      }
+    }
+    default: {
+      $cli_package  = 'php7.0-cli'
+    }
+  }
 }

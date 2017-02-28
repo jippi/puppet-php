@@ -27,6 +27,7 @@
 #
 
 class php::phpunit (
+  $cli_package = $php::phpunit::params::cli_package,
   $ensure      = $php::phpunit::params::ensure,
   $source      = $php::phpunit::params::source,
   $destination = $php::phpunit::params::destination
@@ -42,7 +43,7 @@ class php::phpunit (
       command => "wget ${source} -O ${destination}",
       creates => $destination,
       path    => [ '/bin', '/sbin' , '/usr/bin', '/usr/sbin' ],
-      require => Package['php5-cli'],
+      require => Package[$cli_package],
       before  => File[$destination]
     }
   }

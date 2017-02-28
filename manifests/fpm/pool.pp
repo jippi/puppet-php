@@ -64,20 +64,19 @@ define php::fpm::pool (
   $group_final = $group ? { undef => $user, default => $group }
 
   if ($ensure == 'absent') {
-    file { "/etc/php/7.0/fpm/pool.d/${pool}.conf":
+    file { "${::php::params::config_root}/fpm/pool.d/${pool}.conf":
       ensure => absent,
-      notify => Service['php7.0-fpm']
+      notify => Service[$::php::fpm::params::service_name]
     }
   } else {
-    file { "/etc/php/7.0/fpm/pool.d/${pool}.conf":
+    file { "${::php::params::config_root}/fpm/pool.d/${pool}.conf":
       ensure  => file,
-      notify  => Service['php7.0-fpm'],
-      require => Package['php7.0-fpm'],
+      notify  => Service[$::php::fpm::params::service_name],
+      require => Package[$::php::fpm::params::package],
       content => template('php/fpm/pool.conf.erb'),
       owner   => root,
       group   => root,
       mode    => $config_mode,
     }
   }
-
 }

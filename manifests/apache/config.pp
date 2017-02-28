@@ -34,7 +34,6 @@ define php::apache::config(
   $section  = 'PHP',
   $value    = undef,
 ) {
-
   include ::php::apache::params
 
   if $file {

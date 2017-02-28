@@ -27,6 +27,7 @@
 # Copyright 2012-2015 Christian "Jippi" Winther, unless otherwise noted.
 #
 class php::composer (
+  $cli_package  = $php::composer::params::cli_package,
   $source       = $php::composer::params::source,
   $destination  = $php::composer::params::destination
 ) inherits php::composer::params {
@@ -36,7 +37,7 @@ class php::composer (
     creates => $destination,
     path    => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ],
     require => [
-      Package['php7.0-cli']
+      Package[$cli_package]
     ]
   }
 
@@ -46,5 +47,4 @@ class php::composer (
     group   => root,
     require => Exec['download composer'],
   }
-
 }

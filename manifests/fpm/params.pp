@@ -41,20 +41,17 @@
 class php::fpm::params inherits php::params {
 
   $ensure             = $::php::params::ensure
-  $package            = 'php7.0-fpm'
   $provider           = undef
-  $inifile            = '/etc/php/7.0/fpm/php.ini'
   $settings           = [ ]
 
-  $service_name       = 'php7.0-fpm'
   $service_ensure     = 'running'
   $service_enable     = true
   $service_has_status = true
   $service_provider   = undef
 
   # default params for php-fpm.conf, ported from php::fpm::daemon
-  $pid                          = '/var/run/php7.0-fpm.pid'
-  $error_log                    = '/var/log/php7.0-fpm.log'
+  $fpm_config                   = "${::php::params::config_root}/fpm/php-fpm.conf"
+  $inifile                      = "${::php::params::config_root}/fpm/php.ini"
   $syslog_facility              = undef
   $syslog_ident                 = undef
   $log_level                    = 'notice'
@@ -68,4 +65,36 @@ class php::fpm::params inherits php::params {
   $rlimit_core                  = 0
   $events_mechanism             = undef
 
-}
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
+            $pid            = '/var/run/php7.0-fpm.pid'
+            $error_log      = '/var/log/php7.0-fpm.log'
+            $package        = 'php7.0-fpm'
+            $service_name   = 'php7.0-fpm'
+          } else {
+            $pid            = '/var/run/php5-fpm.pid'
+            $error_log      = '/var/log/php5-fpm.log'
+            $package        = 'php5.0-fpm'
+            $service_name   = 'php5.0-fpm'
+          }
+        }
+        default: {
+          $pid          = '/var/run/php7.0-fpm.pid'
+          $error_log    = '/var/log/php7.0-fpm.log'
+          $package      = 'php7.0-fpm'
+          $service_name = 'php7.0-fpm'
+        }
+      }
+    }
+    default: {
+      $pid          = '/var/run/php7.0-fpm.pid'
+      $error_log    = '/var/log/php7.0-fpm.log'
+      $inifile      = '/etc/php/7.0/fpm/php.ini'
+      $package      = 'php7.0-fpm'
+      $service_name = 'php7.0-fpm'
+    }
+  }
+} 

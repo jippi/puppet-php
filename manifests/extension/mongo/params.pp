@@ -42,11 +42,35 @@
 class php::extension::mongo::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'mongo'
-  $provider = 'pecl'
+  $package  = undef
+  $provider = undef
   $inifile  = "${php::params::config_root_ini}/mongo.ini"
-  $settings = [
-    'set ".anon/extension" "mongo.so"'
-  ]
+  $settings = undef
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
+            $package    = 'php-mongodb'
+            $settings   = []
+          } else {
+            $package    = 'mongo'
+            $provider   = 'pecl'
+            $settings   = [
+                'set ".anon/extension" "mongo.so"'
+            ]
+          }
+        }
+        default: {
+          $package      = 'php-mongodb'
+          $settings     = []
+        }
+      }
+    }
+    default: {
+      $package      = 'php-mongodb'
+      $settings     = []
+    }
+  }
 }

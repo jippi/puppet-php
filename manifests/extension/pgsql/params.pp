@@ -41,8 +41,27 @@
 class php::extension::pgsql::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php7.0-pgsql'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/pgsql.ini"
   $settings = [ ]
+
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
+            $package        = 'php7.0-pgsql'
+          } else {
+            $package        = 'php5-pgsql'
+          }
+        }
+        default: {
+          $package      = 'php7.0-pgsql'
+        }
+      }
+    }
+    default: {
+      $package      = 'php7.0-pgsql'
+    }
+  }
 }

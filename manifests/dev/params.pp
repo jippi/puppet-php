@@ -34,7 +34,25 @@
 class php::dev::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php7.0-dev'
   $provider = undef
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
+            $package        = 'php7.0-dev'
+          } else {
+            $package        = 'php5-dev'
+          }
+        }
+        default: {
+          $package      = 'php7.0-dev'
+        }
+      }
+    }
+    default: {
+      $package      = 'php7.0-dev'
+    }
+  }
 }

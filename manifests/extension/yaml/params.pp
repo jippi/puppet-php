@@ -41,9 +41,27 @@
 class php::extension::yaml::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php7.0-yaml'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/yaml.ini"
   $settings = []
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
+            $package        = 'php-yaml'
+          } else {
+            $package        = 'php5-yaml'
+          }
+        }
+        default: {
+          $package      = 'php-yaml'
+        }
+      }
+    }
+    default: {
+      $package      = 'php-yaml'
+    }
+  }
 }

@@ -52,6 +52,7 @@ class php::fpm(
   $service_provider   = $php::fpm::params::service_provider,
 
   # settings for php-fpm.conf
+  $fpm_config                   = $php::fpm::params::fpm_config,
   $pid                          = $php::fpm::params::pid,
   $error_log                    = $php::fpm::params::error_log,
   $syslog_facility              = $php::fpm::params::syslog_facility,
@@ -66,6 +67,7 @@ class php::fpm(
   $rlimit_core                  = $php::fpm::params::rlimit_core,
   $events_mechanism             = $php::fpm::params::events_mechanism,
 
+  $config_root                  = $php::params::config_root
 ) inherits php::fpm::params {
 
   class  { 'php::fpm::package':
@@ -90,7 +92,7 @@ class php::fpm(
     require => Package[$package]
   }
 
-  file { '/etc/php/7.0/fpm/php-fpm.conf':
+  file { $fpm_config:
     notify  => Service[$service_name],
     content => template('php/fpm/php-fpm.conf.erb'),
     owner   => root,

@@ -41,9 +41,27 @@
 class php::extension::igbinary::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php7.0-igbinary'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/igbinary.ini"
   $settings = [ ]
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
+            $package        = 'php-igbinary'
+          } else {
+            $package        = 'php5-igbinary'
+          }
+        }
+        default: {
+          $package      = 'php-igbinary'
+        }
+      }
+    }
+    default: {
+      $package      = 'php-igbinary'
+    }
+  }
 }

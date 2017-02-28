@@ -32,9 +32,28 @@ define php::contrib::base_package(
   $ensure,
   $provider = undef
 ) {
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
+            $package        = 'php7.0-common'
+          } else {
+            $package        = 'php5-common'
+          }
+        }
+        default: {
+          $package      = 'php7.0-common'
+        }
+      }
+    }
+    default: {
+      $package      = 'php7.0-common'
+    }
+  }
 
-  if !defined(Package['php7.0-common']) {
-    package { 'php7.0-common':
+  if !defined(Package[$package]) {
+    package { $package:
       ensure   => $ensure,
       provider => $provider
     }

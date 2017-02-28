@@ -41,9 +41,27 @@
 class php::extension::mysql::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php7.0-mysql'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/mysql.ini"
   $settings = [ ]
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
+            $package        = 'php7.0-mysql'
+          } else {
+            $package        = 'php5-mysql'
+          }
+        }
+        default: {
+          $package      = 'php7.0-mysql'
+        }
+      }
+    }
+    default: {
+      $package      = 'php7.0-mysql'
+    }
+  }
 }

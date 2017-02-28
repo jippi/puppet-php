@@ -42,9 +42,27 @@
 class php::extension::memcached::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php7.0-memcached'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/memcached.ini"
   $settings = []
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
+            $package        = 'php-memcached'
+          } else {
+            $package        = 'php5-memcached'
+          }
+        }
+        default: {
+          $package      = 'php-memcached'
+        }
+      }
+    }
+    default: {
+      $package      = 'php-memcached'
+    }
+  }
 }

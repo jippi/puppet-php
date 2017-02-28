@@ -41,9 +41,27 @@
 class php::extension::intl::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php7.0-intl'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/intl.ini"
   $settings = [ ]
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
+            $package        = 'php7.0-intl'
+          } else {
+            $package        = 'php5-intl'
+          }
+        }
+        default: {
+          $package      = 'php7.0-intl'
+        }
+      }
+    }
+    default: {
+      $package      = 'php7.0-intl'
+    }
+  }
 }

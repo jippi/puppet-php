@@ -41,9 +41,27 @@
 class php::extension::curl::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php7.0-curl'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/curl.ini"
   $settings = [ ]
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
+            $package        = 'php7.0-curl'
+          } else {
+            $package        = 'php5-curl'
+          }
+        }
+        default: {
+          $package      = 'php7.0-curl'
+        }
+      }
+    }
+    default: {
+      $package      = 'php7.0-curl'
+    }
+  }
 }

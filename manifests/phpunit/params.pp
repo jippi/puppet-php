@@ -42,4 +42,24 @@ class php::phpunit::params inherits php::params {
   $ensure   = $php::params::ensure
   $source = 'https://phar.phpunit.de/phpunit.phar'
   $destination = '/usr/local/bin/phpunit'
+  
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
+            $cli_package    = 'php7.0-cli'
+          } else {
+            $cli_package    = 'php5-cli'
+          }
+        }
+        default: {
+          $cli_package  = 'php7.0-cli'
+        }
+      }
+    }
+    default: {
+      $cli_package  = 'php7.0-cli'
+    }
+  }
 }

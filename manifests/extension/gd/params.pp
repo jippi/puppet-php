@@ -41,9 +41,27 @@
 class php::extension::gd::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php7.0-gd'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/gd.ini"
   $settings = [ ]
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
+            $package        = 'php7.0-gd'
+          } else {
+            $package        = 'php5-gd'
+          }
+        }
+        default: {
+          $package      = 'php7.0-gd'
+        }
+      }
+    }
+    default: {
+      $package      = 'php7.0-gd'
+    }
+  }
 }

@@ -41,9 +41,27 @@
 class php::extension::xcache::params {
 
   $ensure   = $php::params::ensure
-  $package  = 'php7.0-xcache'
   $provider = undef
   $inifile  = "${php::params::config_root_ini}/xcache.ini"
   $settings = []
 
+  case $::osfamily {
+    'Debian': {
+      case $::operatingsystem {
+        'Debian': {
+          if (versioncmp($::operatingsystemrelease, '9') >= 0) {
+            warning('php::extension::xcache is not compatible with Debian >= 9')
+          } else {
+            $package        = 'php5-xcache'
+          }
+        }
+        default: {
+          warning('php::extension::xcache is not compatible with Debian based systems')
+        }
+      }
+    }
+    default: {
+      $package      = 'php-xcache'
+    }
+  }
 }

@@ -47,5 +47,4 @@ class php::extension::jsmin::params {
   $settings = [
     'set ".anon/extension" "jsmin.so"'
   ]
-
 }

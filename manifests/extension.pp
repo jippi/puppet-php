@@ -23,6 +23,15 @@
 # [*source*]
 #   The path to the deb package to install
 #
+# [*sapis*]
+#   An array of PHP SAPIs for which extension should be installed. This
+#   parameters applies to PECL extensions only.
+#   @see http://php.net/manual/en/function.php-sapi-name.php
+#
+# [*priority*]
+#   Module loading priority. Default is 20. .
+#   @see http://www.brandonchecketts.com/archives/getting-ubuntu-14-04-php5enmod-to-understand-module-priority
+#
 # === Variables
 #
 # [*php_ensure*]
@@ -49,6 +58,14 @@
 #   source   => "/path/to/libgearman8_1.1.7-1_amd64.deb";
 # }
 #
+# php::extension { 'gearman':
+#   ensure   => "latest",
+#   package  => "gearman",
+#   provider => "pecl",
+#   sapis    => ['cli', 'fpm'],
+#   priority_=> 30
+# }
+#
 # === Authors
 #
 # Christian "Jippi" Winther <jippignu@gmail.com>
@@ -62,7 +79,9 @@ define php::extension(
   $package,
   $provider = undef,
   $pipe     = undef,
-  $source   = undef
+  $source   = undef,
+  $sapis    = ['cli', 'fpm', 'apache2'],
+  $priority = 20,
 ) {
 
   if $provider == 'pecl' {
@@ -71,6 +90,13 @@ define php::extension(
       provider => $provider,
       source   => $source,
       pipe     => $pipe;
+    }
+    $uniqe_sapis = suffix($sapis, $package)
+    php::sapi { $uniqe_sapis:
+      extension => $package,
+      ensure    => $ensure,
+      priority  => $priority,
+      require   => Package[$package],
     }
   } elsif $provider == 'dpkg' {
     package { $package:

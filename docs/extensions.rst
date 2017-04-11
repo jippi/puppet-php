@@ -126,6 +126,15 @@ Class name: ``php::extension::ldap``.
 
 * ``$inifile`` defaults to ``${php::params::config_root_ini}/ldap.ini``
 
+mapscript
+------
+
+Class name: ``php::extension::mapscript``.
+
+* ``$package`` defaults to ``php5-mapscript``
+
+* ``$inifile`` defaults to ``${php::params::config_root_ini}/mapscript.ini``
+
 mcrypt
 ------
 

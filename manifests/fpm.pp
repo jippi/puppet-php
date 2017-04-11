@@ -89,10 +89,10 @@ class php::fpm(
   }
 
   php::fpm::config { 'php-fpm':
-    file    => $inifile,
-    config  => $settings,
+    file         => $inifile,
+    config       => $settings,
     service_name => $service_name,
-    require => Package[$package]
+    require      => Package[$package]
   }
 
   file { '/etc/php5/fpm/php-fpm.conf':
@@ -106,8 +106,9 @@ class php::fpm(
 
   if ($purge_pools) {
     file { "/etc/php5/fpm/pool.d/":
-      recurse => true, 
-      purge   => true, 
+      recurse => true,
+      purge   => true,
+      require => Package[$package]
     }
   }
 

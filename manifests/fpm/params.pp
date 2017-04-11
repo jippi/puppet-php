@@ -26,6 +26,9 @@
 #   Hash with 'set' nested hash of key => value
 #   set changes to agues when applied to *inifile*
 #
+# [*purge_pools*]
+#   When true, purges all pool files which are not managed by puppet
+#
 # === Examples
 #
 # No examples
@@ -68,4 +71,5 @@ class php::fpm::params inherits php::params {
   $rlimit_core                  = 0
   $events_mechanism             = undef
 
+  $purge_pools                  = false
 }

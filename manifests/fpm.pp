@@ -23,6 +23,9 @@
 #   Hash with 'set' nested hash of key => value
 #   set changes to agues when applied to *inifile*
 #
+# [*purge_pools*]
+#   When true, purges all pool files which are not managed by puppet
+#
 # === Variables
 #
 # No variables
@@ -66,6 +69,8 @@ class php::fpm(
   $rlimit_core                  = $php::fpm::params::rlimit_core,
   $events_mechanism             = $php::fpm::params::events_mechanism,
 
+  $purge_pools                  = $php::fpm::params::purge_pools,
+
 ) inherits php::fpm::params {
 
   class  { 'php::fpm::package':
@@ -97,6 +102,13 @@ class php::fpm(
     group   => root,
     mode    => '0644',
     require => Package[$package]
+  }
+
+  if ($purge_pools) {
+    file { "/etc/php5/fpm/pool.d/":
+      recurse => true, 
+      purge   => true, 
+    }
   }
 
 }
